@@ -9,7 +9,6 @@ einops
 wis3d
 kornia
 numpy==1.26.4
-# for stage 1
 shapely
 tenacity
 openai

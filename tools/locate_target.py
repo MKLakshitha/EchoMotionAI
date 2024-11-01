@@ -67,7 +67,8 @@ def eval(cfg):
 if __name__ == '__main__':
     seed_everything()
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cfg_file", "-c", type=str, required=True)
+    default_config_path = 'configs/locate/locate_chatgpt.yaml'
+    parser.add_argument("--cfg_file", "-c", type=str, default=default_config_path)
     parser.add_argument("--is_test", action="store_true", default=True)
     parser.add_argument("opts", default=None, nargs=argparse.REMAINDER)
     args = parser.parse_args()
