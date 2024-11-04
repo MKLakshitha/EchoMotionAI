@@ -1,11 +1,13 @@
 import os
-import torch
 from time import time
+
+import torch
 import torch.utils.data
 from torch.utils.data.dataloader import default_collate
 
 from lib.utils import logger
 from lib.utils.registry import Registry
+
 DATASET = Registry('dataset')
 from .humanise.humanise_motion import HumaniseMotion
 
@@ -21,6 +23,7 @@ def make_dataset(cfg, split='train'):
     if limit_size > 0 and len(dataset) > limit_size:
         logger.warning(f"Working on subset of size {limit_size}")
         dataset = torch.utils.data.Subset(dataset, list(range(limit_size)))
+        
 
     logger.debug(f"Time for making dataset: {time() - tic:.2f}s")
     return dataset

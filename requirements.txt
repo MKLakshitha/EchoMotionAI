@@ -13,3 +13,4 @@ shapely
 tenacity
 openai
 scikit-learn
+azure-cognitiveservices-speech

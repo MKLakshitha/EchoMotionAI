@@ -1,11 +1,49 @@
 import json
 from pathlib import Path
 
+import azure.cognitiveservices.speech as speechsdk
 import numpy as np
 from shapely.geometry import MultiPoint
 from sklearn.neighbors import NearestNeighbors
 
 from lib.localization.chatgpt_talker import ChatGPTTalker
+
+
+def transcribe_audio_to_text():
+    # Set up the Azure Speech configuration
+    speech_config = speechsdk.SpeechConfig(
+        subscription="30a4cd6230644884bd4aea4bd2bc2dff", 
+        region="eastus"
+    )
+    # Configure to recognize speech from the microphone input
+    audio_config = speechsdk.AudioConfig(use_default_microphone=True)
+    recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
+
+    # Begin recognizing and collect transcription until speech is completed
+    print("Listening...")
+
+    # Define the function that captures continuous speech and concatenates it to get the full transcript
+    def stop_speech(event):
+        nonlocal final_transcription
+        final_transcription += event.result.text
+
+    final_transcription = ""
+    recognizer.recognized.connect(stop_speech)
+
+    # Stop recognition when the speech ends
+    recognizer.session_stopped.connect(lambda _: recognizer.stop_continuous_recognition())
+    recognizer.canceled.connect(lambda _: recognizer.stop_continuous_recognition())
+
+    # Start the recognition
+    recognizer.start_continuous_recognition()
+    print("Recording...")
+
+    # Keep the program running while the speech is recognized
+    recognizer.recognition_end.wait()
+
+    print("Transcription completed.")
+    return final_transcription
+
 
 
 class SceneGraph():
@@ -30,7 +68,8 @@ class SceneGraph():
  
     def inference(self, batch):
         scene_id = batch['meta']['scene_id']
-        text = batch['meta']['utterance']
+        text = transcribe_audio_to_text()
+        print(f'Text is {text}')
         if self.mode == 'gt':
             self.load_gt_scene(batch)
        
@@ -39,13 +78,13 @@ class SceneGraph():
        
         if len(anchor_objects) == 0:
             pred_center, pred_points = self.get_obj_center(self.id2obj[scene_id], target_object)
-            return pred_center, pred_points, response_objects, None
+            return pred_center, pred_points, response_objects, None, text
         else:
             relations = self.scenegraph_relationship(scene_id, target_object, anchor_objects)
             target_name, response_relations = \
                 self.talker.ask_relations(text, relations, self.id2obj[scene_id], target_object, anchor_objects)
             pred_center, pred_points = self.get_obj_center(self.id2obj[scene_id], target_name)
-            return pred_center, pred_points, response_objects, response_relations
+            return pred_center, pred_points, response_objects, response_relations,text
    
  
     def get_obj_center(self, label_objects, target_name):

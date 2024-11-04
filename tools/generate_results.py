@@ -1,18 +1,19 @@
-from lib.utils import offscreen_flag
-import os
 import argparse
+import os
 import pickle
 from pathlib import Path
-from tqdm import tqdm
+
 import torch
+from tqdm import tqdm
 
 from lib.config import make_cfg
 from lib.datasets.make_dataset import make_data_loader
 from lib.networks.make_network import make_network
-from lib.wrapper.wrapper import TwoStageWrapper
-from lib.wrapper.two_stage import save_sample
-from lib.utils.net_utils import to_cuda, load_network
+from lib.utils import offscreen_flag
 from lib.utils.comm import seed_everything
+from lib.utils.net_utils import load_network, to_cuda
+from lib.wrapper.two_stage import save_sample
+from lib.wrapper.wrapper import TwoStageWrapper
 
 
 def process_pred_object(batch):

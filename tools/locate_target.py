@@ -20,7 +20,8 @@ def main(cfg):
         if os.path.exists(response_file): continue
 
         data['pos'] = data[f'xyz_hm']
-        pred_center, pred_points, response_objects, response_relations = \
+
+        pred_center, pred_points, response_objects, response_relations,text = \
             scene_graph.inference(data)
         
         tgt_center = data['obj_center_hm'].numpy()
@@ -31,6 +32,7 @@ def main(cfg):
             f.write(f'pred_center: {pred_center}\n')
             f.write(f'{response_objects}\n')
             f.write(f'{response_relations}\n')
+            f.write(f'text: {text}\n')
         
         with open(object_points_file, 'wb') as f:
             pickle.dump({
@@ -38,6 +40,7 @@ def main(cfg):
                 'tgt_points': tgt_points,
                 'pred_center': pred_center,
                 'pred_points': pred_points,
+                'text': text
             }, f)
 
 
@@ -67,8 +70,7 @@ def eval(cfg):
 if __name__ == '__main__':
     seed_everything()
     parser = argparse.ArgumentParser()
-    default_config_path = 'configs/locate/locate_chatgpt.yaml'
-    parser.add_argument("--cfg_file", "-c", type=str, default=default_config_path)
+    parser.add_argument("--cfg_file", "-c", type=str, required=True)
     parser.add_argument("--is_test", action="store_true", default=True)
     parser.add_argument("opts", default=None, nargs=argparse.REMAINDER)
     args = parser.parse_args()
