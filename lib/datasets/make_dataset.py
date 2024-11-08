@@ -55,8 +55,9 @@ def classify_action(utterance):
     return action if action in ['sit', 'walk', 'lie', 'standup'] else "unknown"
 
 
-def fetch_vocalized_text():
-    response_txt_filepath = '/content/drive/MyDrive/Research_v2/out/locate/gt_chatgpt_paper/response/0.txt'
+def fetch_vocalized_text(cfg,response_folder):
+    response_txt_filepath = f'{response_folder}/{cfg.data_id}.txt'
+    
     if os.path.exists(response_txt_filepath):
         with open(response_txt_filepath, 'r') as f:
             lines = f.readlines()
@@ -69,7 +70,7 @@ def fetch_vocalized_text():
                     data_dict = ast.literal_eval(line.strip())
                     # Extract 'input_text' if it exists in the dictionary
                     input_text_value = data_dict.get('input_text', 'input_text not found')
-                    print(f"input_text value is: {input_text_value}")
+                    print(f"\ninput_text value is: {input_text_value}")
                     return input_text_value
                 except (ValueError, SyntaxError) as e:
                     print(f"Failed to parse line as dictionary: {e}")
@@ -82,8 +83,8 @@ def fetch_vocalized_text():
         return None
 
 
-def collate_fn_wrapper(batch):
-    text = fetch_vocalized_text()
+def collate_fn_wrapper(cfg,batch,response_folder):
+    text = fetch_vocalized_text(cfg,response_folder)
     keys_to_collate_as_list = ['meta']
     list_in_batch = {}
     
@@ -112,7 +113,7 @@ def make_data_sampler(dataset, shuffle, is_distributed):
     return sampler
 
 
-def make_data_loader(cfg, split='train'):
+def make_data_loader(cfg, response_folder,split='train'):
     dataset = make_dataset(cfg, split)
     logger.info(f"Final {split} dataset size: {len(dataset)}")
 
@@ -127,8 +128,9 @@ def make_data_loader(cfg, split='train'):
         assert batch_size % int(os.environ['WORLD_SIZE']) == 0
         batch_size = batch_size // int(os.environ['WORLD_SIZE'])
         num_workers = num_workers // int(os.environ['WORLD_SIZE'])
+    
+    collate_fn = lambda batch: collate_fn_wrapper(cfg,batch, response_folder)
 
-    collate_fn = collate_fn_wrapper
     
     dataloader = torch.utils.data.DataLoader(
         dataset,

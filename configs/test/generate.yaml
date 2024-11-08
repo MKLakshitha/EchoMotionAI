@@ -16,6 +16,8 @@ coord: oc
 
 use_pred_center: True
 pred_center_root: out/locate/gt_chatgpt_paper/object_points
+data_id : 0
+
 
 two_stage: True
 two_stage_cfg:
