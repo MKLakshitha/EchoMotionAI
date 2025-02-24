@@ -1,0 +1,44 @@
+# EchoMotionAI Configuration File
+# Contains all static configurations, API keys, and endpoints
+
+# Azure OpenAI Configuration
+azure_openai:
+  api_key: "35850b4269124a18ae47bde5f0a9c926"  # Consider moving to environment variable
+  endpoint: "https://openai-base-demo.openai.azure.com"
+  model_settings:
+    max_tokens: 300  # Default max tokens for general use
+    generation_tokens: 10  # Specific for dataset generation
+
+# Azure Speech Service Configuration
+azure_speech:
+  subscription_id: "30a4cd6230644884bd4aea4bd2bc2dff"
+  region: "eastus"  # Default region, adjust if needed
+  language: "en-US"
+  output_format: "detailed"
+
+# Model Parameters
+model:
+  clip:
+    enabled: true
+    device: "cuda"  # Default device for CLIP model
+
+# Paths and Directories
+paths:
+  data_dir: "data"
+  output_dir: "outputs"
+  model_dir: "models"
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Visualization Configuration
+visualization:
+  vis_dir: "out/vis3d"
+  host: "localhost"  # Default host, can be overridden by environment variable
+  port: 8080  # Default port, can be overridden by environment variable
+  save_path: "out/test/generate_most_twostage_motion_all/sample.pkl"
+
+# Note: It's recommended to move sensitive information like API keys to environment 
+# variables in production environments for better security.

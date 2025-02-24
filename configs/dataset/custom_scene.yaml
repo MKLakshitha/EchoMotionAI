@@ -1,17 +1,8 @@
-train_dat:
-  name: HumaniseMotion
-  limit_size: -1
-  split: train
-
-val_dat:
-  name: HumaniseMotion
-  limit_size: -1
-  split: test
-
 test_dat:
   name: HumaniseMotion
   limit_size: 1
   split: test
+  scene_id: "scene0633_01"  # Change this to your desired scene ID
 
 dat_cfg:
   humanise_root: data/HUMANISE

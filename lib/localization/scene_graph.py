@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import yaml
 
 import azure.cognitiveservices.speech as speechsdk
 import numpy as np
@@ -9,41 +10,89 @@ from sklearn.neighbors import NearestNeighbors
 from lib.localization.chatgpt_talker import ChatGPTTalker
 
 
+def load_config():
+    config_path = Path(__file__).parent.parent.parent / 'configs' / 'configurations.yaml'
+    with open(config_path, 'r') as file:
+        return yaml.safe_load(file)
+
+
 def transcribe_audio_to_text():
+    config = load_config()
     # Set up the Azure Speech configuration
     speech_config = speechsdk.SpeechConfig(
-        subscription="30a4cd6230644884bd4aea4bd2bc2dff", 
-        region="eastus"
+        subscription=config['azure_speech']['subscription_id'],
+        region=config['azure_speech']['region']
     )
-    # Configure to recognize speech from the microphone input
-    audio_config = speechsdk.AudioConfig(use_default_microphone=True)
+    speech_config.speech_recognition_language = config['azure_speech']['language']
+
+    # Get the audio file path and wait for it
+    audio_file = Path("audio_input/input.wav")
+    import time
+    max_wait_time = 600  # Maximum wait time in seconds (10 minutes)
+    start_time = time.time()
+    min_file_size = 44  # Minimum WAV file header size in bytes
+    
+    print("Waiting for audio file to be available...")
+    while True:
+        if time.time() - start_time > max_wait_time:
+            print(f"Timeout: No valid audio file found at {audio_file.absolute()} after {max_wait_time} seconds")
+            return "No audio file found. Using default text: where is the chair"
+            
+        if not audio_file.exists():
+            time.sleep(1)
+            continue
+            
+        # Check if file size is growing
+        current_size = audio_file.stat().st_size
+        if current_size <= min_file_size:
+            print("Waiting for audio file to be written...")
+            time.sleep(1)
+            continue
+            
+        # Wait a bit more to ensure file is completely written
+        time.sleep(0.5)
+        new_size = audio_file.stat().st_size
+        if new_size == current_size and new_size > min_file_size:
+            print(f"Audio file found and ready at {audio_file.absolute()} (size: {new_size} bytes)")
+            break
+        
+        time.sleep(0.5)
+
+    # Configure to recognize speech from an audio file
+    audio_config = speechsdk.AudioConfig(filename=str(audio_file))
     recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
 
-    # Begin recognizing and collect transcription until speech is completed
-    print("Listening...")
-
-    # Define the function that captures continuous speech and concatenates it to get the full transcript
-    def stop_speech(event):
-        nonlocal final_transcription
-        final_transcription += event.result.text
-
+    print("Processing audio file...")
+    
+    # Use a done event to signal when recognition is complete
+    done = False
     final_transcription = ""
-    recognizer.recognized.connect(stop_speech)
 
-    # Stop recognition when the speech ends
-    recognizer.session_stopped.connect(lambda _: recognizer.stop_continuous_recognition())
-    recognizer.canceled.connect(lambda _: recognizer.stop_continuous_recognition())
+    def handle_result(evt):
+        nonlocal final_transcription
+        if evt.result.text:
+            final_transcription += evt.result.text + " "
 
-    # Start the recognition
+    def stop_cb(evt):
+        print('CLOSING on {}'.format(evt))
+        nonlocal done
+        done = True
+
+    # Connect callbacks to the events fired by the speech recognizer
+    recognizer.recognized.connect(handle_result)
+    recognizer.session_stopped.connect(stop_cb)
+    recognizer.canceled.connect(stop_cb)
+
+    # Start continuous speech recognition
     recognizer.start_continuous_recognition()
-    print("Recording...")
+    while not done:
+        pass
+    recognizer.stop_continuous_recognition()
 
-    # Keep the program running while the speech is recognized
-    recognizer.recognition_end.wait()
+    if not final_transcription:
+        return "No speech detected. Using default text: where is the chair"
 
-    print("Transcription completed.")
-    return final_transcription
-
+    return final_transcription.strip()
 
 
 class SceneGraph():
