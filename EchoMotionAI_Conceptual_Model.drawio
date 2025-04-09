@@ -1,0 +1,159 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36" version="26.1.1">
+  <diagram id="conceptual_model" name="EchoMotionAI Conceptual Model">
+    <mxGraphModel dx="259" dy="129" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="background" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="40" y="20" width="1090" height="790" as="geometry" />
+        </mxCell>
+        <mxCell id="title" value="EchoMotionAI: Conceptual Model" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="184" y="40" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" value="A Multi-Agent System for Human Motion Generation from Textual Descriptions" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontFamily=Times New Roman;fontStyle=2" parent="1" vertex="1">
+          <mxGeometry x="184" y="80" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="inputLayer" value="Input Layer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="120" y="140" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="audioInput" value="Audio Input" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="inputLayer" vertex="1">
+          <mxGeometry y="36" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="speechToText" value="Speech-to-Text Transformation" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="inputLayer" vertex="1">
+          <mxGeometry y="76" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="aiLayer" value="Cognitive Processing Layer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=14;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="380" y="140" width="420" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="multiAgentSystem" value="Multi-Agent System" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=13;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Times New Roman;" parent="aiLayer" vertex="1">
+          <mxGeometry x="20" y="40" width="380" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="sceneGraphComponent" value="Scene Understanding &amp; Graph Construction" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="multiAgentSystem" vertex="1">
+          <mxGeometry x="20" y="36" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="relationshipAnalyzer" value="Spatial &amp; Temporal Relationship Analysis" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="multiAgentSystem" vertex="1">
+          <mxGeometry x="20" y="76" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="chatGPTComponent" value="Multi-Agent ChatGPT System with Memory" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Times New Roman;fontStyle=1" parent="multiAgentSystem" vertex="1">
+          <mxGeometry x="20" y="116" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="neuralNetworkModule" value="Neural Network Processing" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=13;fillColor=#e1d5e7;strokeColor=#9673a6;fontFamily=Times New Roman;" parent="aiLayer" vertex="1">
+          <mxGeometry x="20" y="200" width="380" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="diffuserNetwork" value="Diffusion-Based Motion Generation Network" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="neuralNetworkModule" vertex="1">
+          <mxGeometry x="20" y="36" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="smplxIntegration" value="SMPL-X Parametric Human Body Model" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="neuralNetworkModule" vertex="1">
+          <mxGeometry x="20" y="76" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="motionSynthesis" value="Human Motion Synthesis and Refinement" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="neuralNetworkModule" vertex="1">
+          <mxGeometry x="20" y="116" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="externalAIModule" value="External AI Integration" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=13;fillColor=#e3c800;strokeColor=#B09500;fontColor=#000000;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="120" y="290" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="customLLM" value="Custom LLM for RLHF" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Times New Roman;fontStyle=1" parent="externalAIModule" vertex="1">
+          <mxGeometry y="36" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="memorySystem" value="Agent Memory System" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#fff2cc;strokeColor=#d6b656;fontFamily=Times New Roman;fontStyle=1" parent="externalAIModule" vertex="1">
+          <mxGeometry y="76" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dataLayer" value="Data Management Layer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=14;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="380" y="530" width="420" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="datasetManager" value="Dataset Management" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="dataLayer" vertex="1">
+          <mxGeometry x="20" y="36" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="scannetIntegration" value="ScanNet Environmental Data Integration" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="dataLayer" vertex="1">
+          <mxGeometry x="220" y="36" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="outputLayer" value="Visualization Layer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=14;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="850" y="140" width="200" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="wis3d" value="3D Visualization Environment (Wis3D)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="outputLayer" vertex="1">
+          <mxGeometry y="36" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="motionRender" value="Motion Rendering &amp; Animation" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="outputLayer" vertex="1">
+          <mxGeometry y="86" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dataExport" value="Research Data Export" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="outputLayer" vertex="1">
+          <mxGeometry y="136" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="systemLayer" value="System Management Layer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;fontSize=14;fillColor=#647687;strokeColor=#314354;fontColor=#ffffff;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="850" y="350" width="200" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="configManager" value="Configuration Management" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="systemLayer" vertex="1">
+          <mxGeometry y="36" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="componentRegistry" value="Component Registry" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="systemLayer" vertex="1">
+          <mxGeometry y="86" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="geometryUtils" value="Geometry Utilities" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="systemLayer" vertex="1">
+          <mxGeometry y="136" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="loggingSystem" value="Logging System" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="systemLayer" vertex="1">
+          <mxGeometry y="186" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="perfMetrics" value="Performance Metrics" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;fillColor=#f5f5f5;fontColor=#333333;strokeColor=#666666;fontFamily=Times New Roman;" parent="systemLayer" vertex="1">
+          <mxGeometry y="236" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="keyFeatures" value="Key Features" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="120" y="670" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="feature1" value="• Multi-agent system with memory for improved context understanding" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="120" y="700" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature2" value="• Custom LLM integration for reinforcement learning from human feedback" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="120" y="720" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature3" value="• Advanced motion synthesis using diffusion-based networks" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="120" y="740" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature4" value="• SMPL-X integration for detailed human body modeling" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="530" y="700" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature5" value="• Scene graph representation for complex spatial relationships" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="530" y="720" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="feature6" value="• Environmental context awareness through ScanNet integration" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="530" y="740" width="400" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="footnote" value=" 2025 EchoMotionAI Research - Enhanced with Custom LLM for RLHF and Multi-Agent Memory System" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2;fontFamily=Times New Roman;" parent="1" vertex="1">
+          <mxGeometry x="40" y="780" width="1090" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="inputToAIFlow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#6c8ebf;fontFamily=Times New Roman;" parent="1" source="inputLayer" target="aiLayer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="externalToAgentFlow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#B09500;dashed=1;fontFamily=Times New Roman;" parent="1" target="chatGPTComponent" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="220" y="460" />
+              <mxPoint x="390" y="460" />
+              <mxPoint x="390" y="311" />
+            </Array>
+            <mxPoint x="220" y="400" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="externalToAIFlow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#B09500;fontFamily=Times New Roman;" parent="1" source="externalAIModule" target="aiLayer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aiToDataFlow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#82b366;fontFamily=Times New Roman;" parent="1" source="aiLayer" target="dataLayer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="aiToOutputFlow" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#b85450;fontFamily=Times New Roman;" parent="1" source="aiLayer" target="outputLayer" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="800" y="235" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="configToAllFlow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#d6b656;dashed=1;fontFamily=Times New Roman;" parent="1" source="systemLayer" target="aiLayer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="configToAllFlow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;startArrow=none;startFill=0;endArrow=classic;endFill=1;strokeWidth=2;strokeColor=#d6b656;dashed=1;fontFamily=Times New Roman;" parent="1" source="systemLayer" target="dataLayer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
