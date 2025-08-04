@@ -2,6 +2,7 @@ import ast
 import os
 from time import time
 
+import numpy as np
 import torch
 import torch.utils.data
 from openai import AzureOpenAI
@@ -95,11 +96,83 @@ def collate_fn_wrapper(cfg,batch,response_folder):
                 meta['utterance'] = text
                 meta['action'] = classify_action(text)
     
-    # Use default collate for the rest of the batch
-    batch = default_collate(batch)
-    batch.update({k: v for k, v in list_in_batch.items()})
+    
+    
+    def safe_to_tensor(value):
+        try:
+            if isinstance(value, np.ndarray):
+                # Log array info for debugging
+                logger.debug(f"Converting numpy array with dtype {value.dtype} and shape {value.shape}")
+                if np.issubdtype(value.dtype, np.floating):
+                    return torch.from_numpy(value.astype(np.float32))
+                elif np.issubdtype(value.dtype, np.integer):
+                    return torch.from_numpy(value.astype(np.int64))
+                else:
+                    return torch.from_numpy(value.astype(np.float32))
+            elif isinstance(value, (int, float)):
+                return torch.tensor(value, dtype=torch.float32)
+            elif isinstance(value, (list, tuple)):
+                # Convert lists/tuples to tensors if they contain numbers
+                if all(isinstance(x, (int, float)) for x in value):
+                    return torch.tensor(value, dtype=torch.float32)
+            return value
+        except Exception as e:
+            logger.error(f"Error converting value {type(value)}: {e}")
+            return value
 
-    return batch
+    # Custom collation for numpy arrays
+    processed_batch = []
+    for item_idx, item in enumerate(batch):
+        processed_item = {}
+        for key, value in item.items():
+            if isinstance(value, torch.Tensor):
+                processed_item[key] = value
+            elif isinstance(value, dict):
+                processed_item[key] = value
+            else:
+                # Log problematic values for debugging
+                logger.debug(f"Processing item {item_idx}, key {key}, type {type(value)}")
+                processed_item[key] = safe_to_tensor(value)
+        processed_batch.append(processed_item)
+    
+    # Custom collate function to handle tensors of different types
+    def custom_collate(batch):
+        if len(batch) == 0:
+            return batch
+        
+        elem = batch[0]
+        if isinstance(elem, torch.Tensor):
+            try:
+                return torch.stack(batch, 0)
+            except:
+                return batch
+        elif isinstance(elem, (int, float)):
+            return torch.tensor(batch)
+        elif isinstance(elem, dict):
+            return {key: custom_collate([d[key] for d in batch]) for key in elem}
+        elif isinstance(elem, (tuple, list)) and len(elem) > 0:
+            try:
+                return type(elem)(custom_collate(samples) for samples in zip(*batch))
+            except:
+                return batch
+        else:
+            return batch
+
+    # Use custom collate for the processed batch
+    try:
+        batch = custom_collate(processed_batch)
+        batch.update({k: v for k, v in list_in_batch.items()})
+        return batch
+    except Exception as e:
+        logger.error(f"Error in final collation: {e}")
+        # Fall back to default collate if custom collate fails
+        try:
+            batch = default_collate(processed_batch)
+            batch.update({k: v for k, v in list_in_batch.items()})
+            return batch
+        except Exception as e2:
+            logger.error(f"Both custom and default collate failed: {e2}")
+            raise
 
 
 def make_data_sampler(dataset, shuffle, is_distributed):

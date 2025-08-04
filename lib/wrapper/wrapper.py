@@ -31,7 +31,9 @@ class TwoStageWrapper(nn.Module):
         
         # smplx model
         self.smplx_model = make_smplx('humanise')
-        self.smplx_faces = torch.from_numpy(load_smpl_faces())
+        # Fix: Use torch.tensor() instead of torch.from_numpy()
+        faces_array = load_smpl_faces()
+        self.smplx_faces = torch.tensor(faces_array, dtype=torch.long)
         self.rot_repr = '6d'
         if cfg.get('normalizer', None) is not None:
             self.normalizer = self._build_normalizer(cfg.normalizer)

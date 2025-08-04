@@ -3,19 +3,20 @@ from typing import Any
 from lib.utils import logger
 from lib.utils.registry import Registry
 NORMALIZER = Registry("normalizer")
-
+import numpy as np
 
 @NORMALIZER.register()
 class NormalizerPoseMotion():
     def __init__(self, xmin_max: Any) -> None:
-        self.xmin = xmin_max[0]
-        self.xmax = xmin_max[1]
+        
+        self.xmin = np.asarray(xmin_max[0], dtype=np.float32)
+        self.xmax = np.asarray(xmin_max[1], dtype=np.float32)
 
     def normalize(self, x: Any) -> Any:
         shape = x.shape[-1]
         if torch.is_tensor(x):
-            xmin = torch.tensor(self.xmin, device=x.device)[:shape]
-            xmax = torch.tensor(self.xmax, device=x.device)[:shape]
+            xmin = torch.tensor(self.xmin, dtype=torch.float32, device=x.device)[:shape]
+            xmax = torch.tensor(self.xmax, dtype=torch.float32, device=x.device)[:shape]
         else:
             xmin = self.xmin[:shape]
             xmax = self.xmax[:shape]
@@ -24,8 +25,8 @@ class NormalizerPoseMotion():
     def unnormalize(self, y: Any) -> Any:
         shape = y.shape[-1]
         if torch.is_tensor(y):
-            xmin = torch.tensor(self.xmin, device=y.device)[:shape]
-            xmax = torch.tensor(self.xmax, device=y.device)[:shape]
+            xmin = torch.tensor(self.xmin, dtype=torch.float32, device=y.device)[:shape]
+            xmax = torch.tensor(self.xmax, dtype=torch.float32, device=y.device)[:shape]
         else:
             xmin = self.xmin[:shape]
             xmax = self.xmax[:shape]

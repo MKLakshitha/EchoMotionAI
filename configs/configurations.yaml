@@ -3,8 +3,11 @@
 
 # Azure OpenAI Configuration
 azure_openai:
-  api_key: "35850b4269124a18ae47bde5f0a9c926"  # Consider moving to environment variable
+  api_key: "7aaeb913b95e45459f0558e46f8ce912"  # Consider moving to environment variable
   endpoint: "https://openai-base-demo.openai.azure.com"
+  api_version: "2025-01-01-preview"
+  deployment: "gpt-4o"
+  model_name: "gpt-4o"
   model_settings:
     max_tokens: 300  # Default max tokens for general use
     generation_tokens: 10  # Specific for dataset generation
@@ -15,6 +18,16 @@ azure_speech:
   region: "eastus"  # Default region, adjust if needed
   language: "en-US"
   output_format: "detailed"
+
+# MongoDB Atlas Configuration
+mongodb:
+  connection_string: "mongodb+srv://kavindu:20012628@echomotion.6bjyfzb.mongodb.net/?retryWrites=true&w=majority&appName=echomotion"
+  database_name: "echomotion"
+  collections:
+    conversations: "conversations"
+    agents: "agents"
+    scenes: "scenes"
+  retention_period_days: 30  # How long to keep conversation history
 
 # Model Parameters
 model:
@@ -39,6 +52,12 @@ visualization:
   host: "localhost"  # Default host, can be overridden by environment variable
   port: 8080  # Default port, can be overridden by environment variable
   save_path: "out/test/generate_most_twostage_motion_all/sample.pkl"
+
+# Agent Configuration
+agent:
+  prompt_type: "paper"
+  checkpoint_dir: "agent_checkpoints"
+  memory_enabled: true
 
 # Note: It's recommended to move sensitive information like API keys to environment 
 # variables in production environments for better security.

@@ -39,7 +39,9 @@ def main():
     # visualize
     for t in range(T):
         vis3d.set_scene_id(t)
-        body_mesh = trimesh.Trimesh(vertices=pred_k_motions[cfg.k_id, t].detach().cpu().numpy(), faces=smplx_face)
+        # Convert faces tensor to numpy array for trimesh
+        faces_numpy = smplx_face.detach().cpu().numpy()
+        body_mesh = trimesh.Trimesh(vertices=pred_k_motions[cfg.k_id, t].detach().cpu().numpy(), faces=faces_numpy)
         vis3d.add_mesh(body_mesh, name=f'pred_body')
         vis3d.add_mesh(scene_mesh, name='scene')
 
@@ -58,6 +60,8 @@ if __name__ == '__main__':
     smplx_model = make_smplx('humanise')
     # smplx_model = make_smplx('humanise').to(device)
 
-    smplx_face = torch.from_numpy(smplx_model.bm.faces.astype(np.int64))
+    # Fix: Use torch.tensor() instead of torch.from_numpy()
+    faces_array = smplx_model.bm.faces.astype(np.int64)
+    smplx_face = torch.tensor(faces_array, dtype=torch.long)
 
     main()

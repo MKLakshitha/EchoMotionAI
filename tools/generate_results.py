@@ -25,10 +25,13 @@ def process_pred_object(batch):
             od = pickle.load(f)
         
         scene_points = batch['xyz_hm'][b]
-        pred_points = od['pred_points'] # bbx points
-        bbx_min = pred_points.min(0)
-        bbx_max = pred_points.max(0)
-        obj_mask = (scene_points[:, 0] > bbx_min[0]) & (scene_points[:, 0] < bbx_max[0]) & (scene_points[:, 1] > bbx_min[1]) & (scene_points[:, 1] < bbx_max[1]) & (scene_points[:, 2] > bbx_min[2]) & (scene_points[:, 2] < bbx_max[2])
+        pred_points = torch.tensor(od['pred_points'], dtype=torch.float32) if isinstance(od['pred_points'], list) else od['pred_points'] # bbx points
+        pred_points = pred_points.to(scene_points.device) if isinstance(pred_points, torch.Tensor) else torch.tensor(pred_points, dtype=torch.float32, device=scene_points.device)
+        bbx_min = pred_points.min(0)[0]  # Get values from min result tuple
+        bbx_max = pred_points.max(0)[0]  # Get values from max result tuple
+        obj_mask = (scene_points[:, 0] > bbx_min[0]) & (scene_points[:, 0] < bbx_max[0]) & \
+                  (scene_points[:, 1] > bbx_min[1]) & (scene_points[:, 1] < bbx_max[1]) & \
+                  (scene_points[:, 2] > bbx_min[2]) & (scene_points[:, 2] < bbx_max[2])
         obj_center_hm = torch.mean(scene_points[obj_mask], dim=0)
         
         if coord == 'oc':
@@ -91,7 +94,9 @@ def main(cfg):
         cfg = make_cfg(args)
         cfg.resume_model_dir = ''
         network = make_network(cfg)
+        
         load_network(network, resume=True, cfg=cfg, epoch=-1)
+        print(f"loaded network {cfg.name} from {cfg.resume_model_dir}")
         return network, cfg
 
     # load traj net

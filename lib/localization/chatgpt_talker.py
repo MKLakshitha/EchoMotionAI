@@ -1,25 +1,40 @@
 import os
+import yaml
+from pathlib import Path
 
 import tenacity
 from openai import AzureOpenAI
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+def load_config():
+    config_path = Path(__file__).parent.parent.parent / 'configs' / 'configurations.yaml'
+    with open(config_path, 'r') as file:
+        return yaml.safe_load(file)
 
 
 class ChatGPTTalker():
     def __init__(self, prompt_type='paper'):
         self.prompt_type = prompt_type
-       
+        
+        # Load configuration from YAML file
+        config = load_config()
+        openai_config = config['azure_openai']
+        
         self.client = AzureOpenAI(
-            azure_deployment="openai-base-demo-4o",
-            api_version='2024-04-01-preview',
-            api_key="35850b4269124a18ae47bde5f0a9c926",
-            azure_endpoint="https://openai-base-demo.openai.azure.com",
+            azure_deployment=openai_config['deployment'],
+            api_version=openai_config['api_version'],
+            api_key=openai_config['api_key'],
+            azure_endpoint=openai_config['endpoint'],
         )
-        self.model_name = "gpt-4o"
+        self.model_name = openai_config['model_name']
  
     @tenacity.retry(wait=tenacity.wait_exponential(multiplier=1, min=4, max=10),
                     stop=tenacity.stop_after_attempt(5),
                     reraise=True)
-    def ask_objects_gpt(self, text, all_objects):
+    def ask_objects_gpt(self, text, all_objects, conversation_context=""):
         object_string = ', '.join(all_objects)
         if self.prompt_type == 'paper':
             messages = [
@@ -49,7 +64,9 @@ class ChatGPTTalker():
                 {
                     "role": "user",
                     "content": f"""
-                        The room contains: {object_string}. The text description is: {text}.
+                        The room contains: {object_string}. 
+                        {conversation_context}
+                        The text description is: {text}.
                         Please make sure that the target object and anchor object are in the room. If you cannot find the answer, just make a guess.
                         Answer should be in the following format without any explanations: target: <target object>\nanchor: <anchor object>\n
                     """,
@@ -73,7 +90,7 @@ class ChatGPTTalker():
     @tenacity.retry(wait=tenacity.wait_exponential(multiplier=1, min=4, max=10),
                     stop=tenacity.stop_after_attempt(5),
                     reraise=True)
-    def ask_relation_gpt(self, text, relations, target_object, anchor_objects):
+    def ask_relation_gpt(self, text, relations, target_object, anchor_objects, conversation_context=""):
         assert relations != []
         all_relations = [v for k, v in relations.items()]
         relation_string = '; '.join(all_relations)
@@ -98,7 +115,9 @@ class ChatGPTTalker():
                 {
                     "role": "user",
                     "content": f"""
-                        The room contains: {relation_string}. The text description is: {text}. Previously, you have found that the target object is {target_object} and the anchor objects are {anchor_string}. If you cannot find the answer, just make a guess.
+                        The room contains: {relation_string}. 
+                        {conversation_context}
+                        The text description is: {text}. Previously, you have found that the target object is {target_object} and the anchor objects are {anchor_string}. If you cannot find the answer, just make a guess.
                         Please provide your thinking process along with your answer. Then the answers should be in a new line. There should be only one target object. Please answer in the following format without any explanations: target: <target object>
                     """,
                 }
@@ -117,7 +136,6 @@ class ChatGPTTalker():
             'input_text': text,
             'input_relation': relation_string,
         }
-   
    
     def check_objects(self, response, all_objects):
         lines = response['response'].split('\n')
@@ -163,18 +181,19 @@ class ChatGPTTalker():
             target_object, sim = classify(response['response'], all_objects)
         return target_object
    
-    def ask_objects(self, text, obj_dict):
+    def ask_objects(self, text, obj_dict, conversation_context=""):
         '''
             Output: target_object, anchor_objects, response
         '''
         all_objects = [obj for obj in obj_dict.keys()]
         target_object = None
         while target_object is None:
-            response = self.ask_objects_gpt(text, all_objects)
+            response = self.ask_objects_gpt(text, all_objects, conversation_context)
+            logger.info(f"Response from GPT: {response['response']}")
             target_object, anchor_objects = self.check_objects(response, all_objects)
         return target_object, anchor_objects, response
  
-    def ask_relations(self, text, relations, obj_dict, target_object, anchor_objects):
+    def ask_relations(self, text, relations, obj_dict, target_object, anchor_objects, conversation_context=""):
         '''
             Output: target_object, response
         '''
@@ -183,7 +202,7 @@ class ChatGPTTalker():
             for obj in lable_objects:
                 all_objects.append(obj["name"])
        
-        response = self.ask_relation_gpt(text, relations, target_object, anchor_objects)
+        response = self.ask_relation_gpt(text, relations, target_object, anchor_objects, conversation_context)
         target_object = self.check_target(response, all_objects)
         return target_object, response
  

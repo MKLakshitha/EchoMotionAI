@@ -3,7 +3,7 @@ import os
 import pickle
 
 from tqdm import tqdm
-
+import numpy as np
 from lib.config import make_cfg
 from lib.datasets.make_dataset import make_dataset
 from lib.localization.eval_localization import evaluate_pd_bbox_by_span
@@ -11,8 +11,16 @@ from lib.localization.scene_graph import SceneGraph
 from lib.utils.comm import seed_everything
 
 
+# Global scene_graph to maintain session persistence
+persistent_scene_graph = None
+
 def main(cfg):
-    scene_graph = SceneGraph(cfg)
+    global persistent_scene_graph
+    
+    # Create scene_graph only once to maintain session persistence
+    if persistent_scene_graph is None:
+        persistent_scene_graph = SceneGraph(cfg)
+        
     for iter, data in enumerate(tqdm(data_loader)):
         response_file = f'{response_folder}/{iter}.txt'
         object_points_file = f'{object_points_folder}/{iter}.pkl'
@@ -21,27 +29,29 @@ def main(cfg):
 
         data['pos'] = data[f'xyz_hm']
 
-        pred_center, pred_points, response_objects, response_relations,text = \
-            scene_graph.inference(data)
+        # Use our persistent scene_graph with accumulated context
+        pred_center, pred_points, response_objects, response_relations, text = \
+            persistent_scene_graph.inference(data)
         
         tgt_center = data['obj_center_hm'].numpy()
         tgt_points = data['xyz_hm'][data['obj_mask']].numpy()
         
         with open(response_file, 'w') as f:
-            f.write(f'tgt_center: {tgt_center}\n')
-            f.write(f'pred_center: {pred_center}\n')
+            f.write(f'tgt_center: {tgt_center.tolist()}\n')
+            f.write(f'pred_center: {pred_center.tolist() if hasattr(pred_center, "tolist") else pred_center}\n')
             f.write(f'{response_objects}\n')
             f.write(f'{response_relations}\n')
             f.write(f'text: {text}\n')
         
         with open(object_points_file, 'wb') as f:
             pickle.dump({
-                'tgt_center': tgt_center,
-                'tgt_points': tgt_points,
-                'pred_center': pred_center,
-                'pred_points': pred_points,
+                'tgt_center': tgt_center.tolist(),
+                'tgt_points': tgt_points.tolist(),
+                'pred_center': pred_center.tolist() if hasattr(pred_center, 'tolist') else pred_center,
+                'pred_points': pred_points.tolist() if hasattr(pred_points, 'tolist') else pred_points,
                 'text': text
             }, f)
+
 
 
 def eval(cfg):
@@ -54,9 +64,14 @@ def eval(cfg):
             with open(object_points_file, 'rb') as f:
                 pdata = pickle.load(f)
         
-            gt_points = pdata['tgt_points']
-            pd_points = pdata['pred_points']
-            center_loss.append(((pdata['pred_center'] - pdata['tgt_center']) ** 2).sum() ** 0.5)
+            # Convert lists back to numpy arrays
+            gt_points = np.array(pdata['tgt_points'])
+            pd_points = np.array(pdata['pred_points'])
+            pred_center = np.array(pdata['pred_center'])
+            tgt_center = np.array(pdata['tgt_center'])
+            
+            # Calculate center loss using numpy arrays
+            center_loss.append(((pred_center - tgt_center) ** 2).sum() ** 0.5)
             
             found = evaluate_pd_bbox_by_span(pd_points, gt_points, cfg.mode)
             all_count += 1

@@ -1,6 +1,7 @@
 import argparse
 import os
 import pickle
+import numpy as np
 
 from tqdm import tqdm
 
@@ -103,8 +104,16 @@ def run_visualization(vis_dir, host='localhost', port=8080):
         print(f"Error starting visualization: {e}")
         return None
 
+# Create a global scene_graph variable to persist across function calls
+gllobal_scene_graph = None
+
 def locate_target(cfg, data_loader,response_folder,object_points_folder):
-    scene_graph = SceneGraph(cfg)
+    global gllobal_scene_graph
+    
+    # Create the SceneGraph only if it doesn't exist yet
+    if gllobal_scene_graph is None:
+        gllobal_scene_graph = SceneGraph(cfg)
+    
     for iter, data in enumerate(tqdm(data_loader)):
         response_file = f'{response_folder}/{iter}.txt'
         object_points_file = f'{object_points_folder}/{iter}.pkl'
@@ -114,24 +123,24 @@ def locate_target(cfg, data_loader,response_folder,object_points_folder):
         data['pos'] = data[f'xyz_hm']
 
         pred_center, pred_points, response_objects, response_relations,text = \
-            scene_graph.inference(data)
+            gllobal_scene_graph.inference(data)
         
         tgt_center = data['obj_center_hm'].numpy()
         tgt_points = data['xyz_hm'][data['obj_mask']].numpy()
         
         with open(response_file, 'w') as f:
-            f.write(f'tgt_center: {tgt_center}\n')
-            f.write(f'pred_center: {pred_center}\n')
+            f.write(f'tgt_center: {tgt_center.tolist()}\n')
+            f.write(f'pred_center: {pred_center.tolist() if hasattr(pred_center, "tolist") else pred_center}\n')
             f.write(f'{response_objects}\n')
             f.write(f'{response_relations}\n')
             f.write(f'text: {text}\n')
         
         with open(object_points_file, 'wb') as f:
             pickle.dump({
-                'tgt_center': tgt_center,
-                'tgt_points': tgt_points,
-                'pred_center': pred_center,
-                'pred_points': pred_points,
+                'tgt_center': tgt_center.tolist(),
+                'tgt_points': tgt_points.tolist(),
+                'pred_center': pred_center.tolist() if hasattr(pred_center, 'tolist') else pred_center,
+                'pred_points': pred_points.tolist() if hasattr(pred_points, 'tolist') else pred_points,
                 'text': text
             }, f)
 
@@ -146,9 +155,14 @@ def locate_eval(cfg, data_loader,object_points_folder):
             with open(object_points_file, 'rb') as f:
                 pdata = pickle.load(f)
         
-            gt_points = pdata['tgt_points']
-            pd_points = pdata['pred_points']
-            center_loss.append(((pdata['pred_center'] - pdata['tgt_center']) ** 2).sum() ** 0.5)
+            # Convert lists back to numpy arrays
+            gt_points = np.array(pdata['tgt_points'])
+            pd_points = np.array(pdata['pred_points'])
+            pred_center = np.array(pdata['pred_center'])
+            tgt_center = np.array(pdata['tgt_center'])
+            
+            # Calculate center loss using numpy arrays
+            center_loss.append(((pred_center - tgt_center) ** 2).sum() ** 0.5)
             
             found = evaluate_pd_bbox_by_span(pd_points, gt_points, cfg.mode)
             all_count += 1
@@ -168,10 +182,13 @@ def process_pred_object(batch,cfg):
             od = pickle.load(f)
         
         scene_points = batch['xyz_hm'][b]
-        pred_points = od['pred_points'] # bbx points
-        bbx_min = pred_points.min(0)
-        bbx_max = pred_points.max(0)
-        obj_mask = (scene_points[:, 0] > bbx_min[0]) & (scene_points[:, 0] < bbx_max[0]) & (scene_points[:, 1] > bbx_min[1]) & (scene_points[:, 1] < bbx_max[1]) & (scene_points[:, 2] > bbx_min[2]) & (scene_points[:, 2] < bbx_max[2])
+        pred_points = torch.tensor(od['pred_points'], dtype=torch.float32) if isinstance(od['pred_points'], list) else od['pred_points'] # bbx points
+        pred_points = pred_points.to(scene_points.device) if isinstance(pred_points, torch.Tensor) else torch.tensor(pred_points, dtype=torch.float32, device=scene_points.device)
+        bbx_min = pred_points.min(0)[0]  # Get values from min result tuple
+        bbx_max = pred_points.max(0)[0]  # Get values from max result tuple
+        obj_mask = (scene_points[:, 0] > bbx_min[0]) & (scene_points[:, 0] < bbx_max[0]) & \
+                  (scene_points[:, 1] > bbx_min[1]) & (scene_points[:, 1] < bbx_max[1]) & \
+                  (scene_points[:, 2] > bbx_min[2]) & (scene_points[:, 2] < bbx_max[2])
         obj_center_hm = torch.mean(scene_points[obj_mask], dim=0)
         
         if coord == 'oc':
@@ -248,8 +265,6 @@ def initialize_cfg(args):
 
 
 
-
-
 def generate_results(cfg,data_loader):
     def load_one_network(args):
         cfg = make_cfg(args)
@@ -275,7 +290,10 @@ def run_continuous_processing(cfg):
     # Create input directory
     input_dir = Path("audio_input")
     input_dir.mkdir(exist_ok=True)
-
+    
+    # Create the persistent SceneGraph that will be used throughout the entire session
+    global gllobal_scene_graph
+    gllobal_scene_graph = SceneGraph(cfg)
     
     # Setup output folders
     out_folder = f'{cfg.record_dir}/{cfg.mode}_{cfg.method}_{cfg.prompt_type}'
