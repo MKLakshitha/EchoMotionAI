@@ -61,3 +61,5 @@ agent:
 
 # Note: It's recommended to move sensitive information like API keys to environment 
 # variables in production environments for better security.
+
+HUGGINGFACE_TOKEN: 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

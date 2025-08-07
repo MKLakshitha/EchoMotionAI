@@ -1,0 +1,7 @@
+unsloth
+vllm
+fastapi
+pydantic
+uvicorn
+httpx
+accelerate
