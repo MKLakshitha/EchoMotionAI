@@ -5,7 +5,8 @@ from pathlib import Path
 import tenacity
 from openai import AzureOpenAI
 import logging
-
+import requests
+import json
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -13,16 +14,15 @@ def load_config():
     config_path = Path(__file__).parent.parent.parent / 'configs' / 'configurations.yaml'
     with open(config_path, 'r') as file:
         return yaml.safe_load(file)
-
-
+    
+config = load_config()
+LLM_BASE_URL = config['LLM_BASE_URL']
+openai_config = config['azure_openai']
 class ChatGPTTalker():
     def __init__(self, prompt_type='paper'):
         self.prompt_type = prompt_type
         
-        # Load configuration from YAML file
-        config = load_config()
-        openai_config = config['azure_openai']
-        
+
         self.client = AzureOpenAI(
             azure_deployment=openai_config['deployment'],
             api_version=openai_config['api_version'],
@@ -36,55 +36,75 @@ class ChatGPTTalker():
                     reraise=True)
     def ask_objects_gpt(self, text, all_objects, conversation_context=""):
         object_string = ', '.join(all_objects)
+        
         if self.prompt_type == 'paper':
-            messages = [
-                {
-                    "role": "system",
-                    "content": "You are an assistant that helps people find objects in a room. You are given a list of objects in a room together with a text descriptions. You should determine the target object and anchor object in the text description and map it to the objects in the room. If the object is in the room, just pick it. However, if the object cannot be find in the room, you should pick a room object that is the most similar to the target object."},
-                {
-                    "role": "assistant",
-                    "content": """
-                        Here are the examples:
-                        Assume the room has: table, sofa chair, door, bed, washing machine, toliet.
-                        Please note that anchors should be split by ",".
-                        1. Walk to the bathroom vanity. Please answer:
-                            target: toliet
-                            anchor: None
-                        2. Sit on the chair that is next to the tables. Please answer:
-                            target: sofa chair
-                            anchor: table
-                        3. Lie on the tables that is in the center of the door and the bed. Please answer:
-                            target: table
-                            anchor: door, bed
-                        4. Stand up from the chair that is next to the tables. Please answer:
-                            target: sofa chair
-                            anchor: table
-                    """,
-                },
-                {
-                    "role": "user",
-                    "content": f"""
-                        The room contains: {object_string}. 
-                        {conversation_context}
-                        The text description is: {text}.
-                        Please make sure that the target object and anchor object are in the room. If you cannot find the answer, just make a guess.
-                        Answer should be in the following format without any explanations: target: <target object>\nanchor: <anchor object>\n
-                    """,
+            # Create the message for our FastAPI service
+            if conversation_context:
+                full_text = f"Conversation History : {conversation_context}\n User Request: {text} \n\nPlease make sure that the target object and anchor object are in the room."
+            else:
+                full_text = text
+            
+            # Prepare payload for FastAPI service
+            payload = {
+                "message": full_text,
+                "room_objects": all_objects
+            }
+            print(f"Conversation Context: {conversation_context}")
+            try:
+                # Make request to FastAPI service
+                response = requests.post(
+                    f"{LLM_BASE_URL}/detect",
+                    json=payload,
+                    headers={"Content-Type": "application/json"},
+                    timeout=30  # Add timeout to prevent hanging
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    
+                    # Format response to match EXACT expected format
+                    target = result['target']
+                    anchor = result['anchor'] if result['anchor'] and result['anchor'].lower() != 'none' else None
+                    
+                    if anchor:
+                        formatted_response = f"target: {target}\nanchor: {anchor}"
+                    else:
+                        formatted_response = f"target: {target}\nanchor: None"
+                    
+                    return {
+                        'response': formatted_response,
+                        'input_text': text,
+                        'input_object': object_string,
+                        'reasoning': result.get('reasoning', ''),  # Additional field with reasoning
+                        'raw_result': result  # Keep raw result for debugging
+                    }
+                else:
+                    # Handle API errors
+                    error_msg = f"API Error: {response.status_code} - {response.text}"
+                    print(f"Error calling LLM API: {error_msg}")
+                    
+                    # Return fallback response
+                    return {
+                        'response': f"target: {all_objects[0] if all_objects else 'unknown'}\nanchor: None",
+                        'input_text': text,
+                        'input_object': object_string,
+                        'error': error_msg
+                    }
+                    
+            except requests.exceptions.RequestException as e:
+                # Handle network errors
+                error_msg = f"Network Error: {str(e)}"
+                print(f"Error calling LLM API: {error_msg}")
+                
+                # Return fallback response
+                return {
+                    'response': f"target: {all_objects[0] if all_objects else 'unknown'}\nanchor: None",
+                    'input_text': text,
+                    'input_object': object_string,
+                    'error': error_msg
                 }
-            ]
         else:
             raise NotImplementedError
-               
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=messages,
-            temperature=0.5,
-        )
-        return {
-            'response': response.choices[0].message.content,
-            'input_text': text,
-            'input_object': object_string,
-        }
    
    
     @tenacity.retry(wait=tenacity.wait_exponential(multiplier=1, min=4, max=10),
@@ -189,7 +209,7 @@ class ChatGPTTalker():
         target_object = None
         while target_object is None:
             response = self.ask_objects_gpt(text, all_objects, conversation_context)
-            logger.info(f"Response from GPT: {response['response']}")
+            logger.info(f"Response from GPT: \n{response['response']}")
             target_object, anchor_objects = self.check_objects(response, all_objects)
         return target_object, anchor_objects, response
  

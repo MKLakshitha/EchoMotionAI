@@ -63,3 +63,5 @@ agent:
 # variables in production environments for better security.
 
 HUGGINGFACE_TOKEN: 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
+
+LLM_BASE_URL : "http://localhost:8005"

@@ -2,7 +2,8 @@ import argparse
 import os
 import pickle
 import numpy as np
-
+import json
+import requests
 from tqdm import tqdm
 
 from lib.config import make_cfg
@@ -28,6 +29,13 @@ import shutil
 import select
 import termios
 import tty
+
+def load_config():
+    config_path = Path(__file__).parent.parent / 'configs' / 'configurations.yaml'
+    with open(config_path, 'r') as file:
+        return yaml.safe_load(file)
+config = load_config()
+LLM_BASE_URL = config['LLM_BASE_URL']
 
 def run_visualization_pipeline(save_path, vis_dir, host='localhost', port=8080):
     try:
@@ -338,6 +346,17 @@ def run_continuous_processing(cfg):
     shutil.rmtree(object_points_folder)
     print("Cleaned up, ready for next input")
             
+def test_health_check():
+    """Test the health check endpoint"""
+    print("🔍 Testing health check...")
+    try:
+        response = requests.get(f"{LLM_BASE_URL}/health")
+        print(f"Status: {response.status_code}")
+        print(f"Response: {json.dumps(response.json(), indent=2)}")
+        return response.status_code == 200
+    except Exception as e:
+        print(f"❌ Health check failed: {e}")
+        return False
 
 
 if __name__ == '__main__':
@@ -345,7 +364,9 @@ if __name__ == '__main__':
     import select
     import termios
     import tty
-    
+
+    test_health_check()
+
     def is_data():
         return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
     
