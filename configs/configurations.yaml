@@ -3,18 +3,18 @@
 
 # Azure OpenAI Configuration
 azure_openai:
-  api_key: "7aaeb913b95e45459f0558e46f8ce912"  # Consider moving to environment variable
-  endpoint: "https://openai-base-demo.openai.azure.com"
-  api_version: "2025-01-01-preview"
-  deployment: "gpt-4o"
-  model_name: "gpt-4o"
+  api_key: "your_api_key"  # Consider moving to environment variable
+  endpoint: "your_endpoint"
+  api_version: "api_version"
+  deployment: "deployment"
+  model_name: "model"
   model_settings:
     max_tokens: 300  # Default max tokens for general use
     generation_tokens: 10  # Specific for dataset generation
 
 # Azure Speech Service Configuration
 azure_speech:
-  subscription_id: "30a4cd6230644884bd4aea4bd2bc2dff"
+  subscription_id: "speech_sdk_id"
   region: "eastus"  # Default region, adjust if needed
   language: "en-US"
   output_format: "detailed"
