@@ -2,14 +2,33 @@ import torch
 from .humanise_base import Humanise
 from lib.datasets.make_dataset import DATASET
 from .utils import transform_smplx
+from lib.config import make_cfg
+from argparse import Namespace
+args = Namespace(
+    cfg_file='configs/locate/locate_chatgpt.yaml',
+    is_test=True,
+    opts=[]
+)
 
-
+# pass into make_cfg (if it expects args)
+cfg = make_cfg(args)
 @DATASET.register()
 class HumaniseMotion(Humanise):
     def __init__(self, dat_cfg, split='train') -> None:
         super().__init__(dat_cfg, split=split)
         self.coord = dat_cfg.get('coord', 'oc')
         self.min_t = dat_cfg.get('min_t', 0)
+        scene_cfg = cfg.get(f"{split}_dat")
+        print(f"Using scene_id: {scene_cfg}")
+
+        # print(sorted(set(meta['scene_id'] for meta in self.idx2meta)))
+
+        if hasattr(scene_cfg, "scene_id") and scene_cfg.scene_id is not None:
+            before = len(self.idx2meta)
+            self.idx2meta = [meta for meta in self.idx2meta if meta['scene_id'] == scene_cfg.scene_id]
+            after = len(self.idx2meta)
+            print(f"Filtered by scene_id={scene_cfg.scene_id}, kept {after}/{before} samples")
+
         self.idx2meta = [meta for meta in self.idx2meta if meta['m_len'] >= self.min_t]
         self.sample_data_interval = dat_cfg.get('sample_data_interval', 1)
         

@@ -3,25 +3,25 @@
 
 # Azure OpenAI Configuration
 azure_openai:
-  api_key: "your_api_key"  # Consider moving to environment variable
-  endpoint: "your_endpoint"
-  api_version: "api_version"
-  deployment: "deployment"
-  model_name: "model"
+  api_key: ""  # Consider moving to environment variable
+  endpoint: ""
+  api_version: ""
+  deployment: ""
+  model_name: ""
   model_settings:
     max_tokens: 300  # Default max tokens for general use
     generation_tokens: 10  # Specific for dataset generation
 
 # Azure Speech Service Configuration
 azure_speech:
-  subscription_id: "speech_sdk_id"
-  region: "eastus"  # Default region, adjust if needed
+  subscription_id: ""
+  region: ""  # Default region, adjust if needed
   language: "en-US"
   output_format: "detailed"
 
 # MongoDB Atlas Configuration
 mongodb:
-  connection_string: "mongodb+srv://kavindu:20012628@echomotion.6bjyfzb.mongodb.net/?retryWrites=true&w=majority&appName=echomotion"
+  connection_string: "mongodb+srv://url/?retryWrites=true&w=majority&appName=echomotion"
   database_name: "echomotion"
   collections:
     conversations: "conversations"

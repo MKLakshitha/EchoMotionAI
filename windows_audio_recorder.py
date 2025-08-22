@@ -85,4 +85,8 @@ def record_audio(filename="audio_input/input.wav"):
     p.terminate()
 
 if __name__ == "__main__":
+    start_time = time.time()
+    print("Starting audio recording...")
     record_audio()
+    end_time = time.time()
+    print(f"Audio recording completed in {end_time - start_time:.2f} seconds")

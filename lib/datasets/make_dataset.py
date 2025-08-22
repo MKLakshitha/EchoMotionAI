@@ -23,11 +23,14 @@ client = AzureOpenAI(
 
 def make_dataset(cfg, split='train'):
     tic = time()
+
+
     dat_cfg = cfg.get(f"{split}_dat")
     logger.info(f"Making {split} dataset: {dat_cfg.name}")
-
+    print(f" scene id is {dat_cfg.scene_id}")
     # load real dataset
     dataset = DATASET.get(dat_cfg.name)(cfg.dat_cfg, dat_cfg.split)
+    print(f"Dataset {dat_cfg.name} loaded with {len(dataset)} samples and dataset is {dataset}")
     limit_size = dat_cfg.limit_size
     if limit_size > 0 and len(dataset) > limit_size:
         logger.warning(f"Working on subset of size {limit_size}")
@@ -39,10 +42,13 @@ def make_dataset(cfg, split='train'):
 
 
 def classify_action(utterance):
-    prompt = f"Classify the action as one of the following: sit, walk, lie, standup. Utterance: '{utterance}'"
+    prompt = f"""Classify the action as one of the following: sit, walk, lie, standup. Utterance: '{utterance}'
+    if similiar words like 'go' should be classified as 'walk' , 'stand' should be classified as 'standup', 'sleep' should be classified as 'lie', 'sit down' should be classified as 'sit'.
+    Only Respond with the action name without any additional text.
+    """
     # Use OpenAI's model to determine the action based on the utterance
     response = client.chat.completions.create(
-        model="text-davinci-003",
+        model="",
         messages=[{
             'role': 'system',
             'content': prompt
@@ -53,6 +59,7 @@ def classify_action(utterance):
         temperature=0
     )
     action = response.choices[0].message.content
+    print(f"Action classified as: {action}")
     return action if action in ['sit', 'walk', 'lie', 'standup'] else "unknown"
 
 

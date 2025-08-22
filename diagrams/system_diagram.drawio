@@ -1,0 +1,282 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0" version="28.1.0">
+  <diagram id="EchoMotionAI-Architecture" name="EchoMotionAI System Architecture">
+    <mxGraphModel dx="2026" dy="1123" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="EchoMotionAI: System Architecture Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#1f4e79;" parent="1" vertex="1">
+          <mxGeometry x="400" y="20" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="user" value="👤 User" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="voiceInterface" value="🎙️ Voice Interface&#xa;&#xa;Windows Audio Recorder&#xa;• Press &amp; Hold SPACE&#xa;• WAV 16kHz Mono&#xa;• Real-time PyAudio" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="240" y="100" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="speechToText" value="🗣️ Speech-to-Text&#xa;&#xa;Azure Cognitive Services&#xa;• Speech SDK&#xa;• Continuous Recognition&#xa;• Event Handling&#xa;• Text Transcription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="460" y="100" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="languageUnderstanding" value="🧠 Language Understanding&#xa;&#xa;RLHF-Trained LLM&#xa;• Qwen 2.5-3B Base Model&#xa;• GRPO Fine-tuning&#xa;• LoRA Adapters (Rank-64)&#xa;• Chain-of-Thought Reasoning&#xa;• XML Structured Output" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="680" y="80" width="180" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="memorySystem" value="💾 Memory System&#xa;&#xa;MongoDB Database&#xa;• Session Management&#xa;• Conversation History&#xa;• Context Storage&#xa;• Spatial Relationships&#xa;• Object References" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="920" y="80" width="160" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="sceneModule" value="🏠 Scene Understanding Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="160" y="300" width="440" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="scanNetLoader" value="📁 ScanNet Loader&#xa;&#xa;• PLY Mesh Files&#xa;• Object Segmentation&#xa;• JSON Aggregation&#xa;• Vertex Processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="180" y="340" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="pointCloudProcessor" value="☁️ Point Cloud Processor&#xa;&#xa;• Coordinate Systems&#xa;• Object Masks&#xa;• Bounding Boxes&#xa;• Transformations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="320" y="340" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="spatialAnalyzer" value="📐 Spatial Analyzer&#xa;&#xa;• Relationship Graphs&#xa;• Distance Calculations&#xa;• Spatial Queries&#xa;• Object Localization" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="460" y="340" width="120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="sceneGraph" value="🕸️ Scene Graph&#xa;&#xa;• Object Dictionary&#xa;• 3D Positions&#xa;• Spatial Relations&#xa;• Context Integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="180" y="460" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="coordinateManager" value="🧭 Coordinate Manager&#xa;&#xa;• HM Frame&#xa;• OC Frame&#xa;• ScanNet Frame&#xa;• Transformations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="400" y="460" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="motionModule" value="🏃 Motion Generation Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="680" y="300" width="480" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="stage1Diffuser" value="🎯 Stage 1: Trajectory Generator&#xa;&#xa;Diffusion Network (Traj)&#xa;• Coarse Trajectory&#xa;• 9D Output (3D Pos + 6D Rot)&#xa;• Scene Constraints&#xa;• Path Planning" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="700" y="340" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="stage2Diffuser" value="🤸 Stage 2: Motion Generator&#xa;&#xa;Diffusion Network (Motion)&#xa;• Full Body Poses&#xa;• 69D SMPL-X Parameters&#xa;• Detailed Articulation&#xa;• Trajectory Refinement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="900" y="340" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="smplxModel" value="👤 SMPL-X Model&#xa;&#xa;• 69 Pose Parameters&#xa;• 6890 Vertices&#xa;• Body + Hands + Face&#xa;• Mesh Generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="700" y="460" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="normalizer" value="⚖️ Data Normalizer&#xa;&#xa;• Min-Max Normalization&#xa;• [-1, 1] Range&#xa;• Component Separation&#xa;• Device-Aware Tensors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="860" y="460" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="humaniseDataset" value="📊 HUMANISE Dataset&#xa;&#xa;• Motion Capture Data&#xa;• Scene Alignment&#xa;• Temporal Sequences&#xa;• Collision Avoidance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1020" y="460" width="140" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="visualizationModule" value="🎬 Visualization &amp; Output Module" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="240" y="640" width="720" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="plyGenerator" value="📐 PLY Mesh Generator&#xa;&#xa;• Scene PLY Files&#xa;• SMPL-X Meshes&#xa;• Temporal Sequences&#xa;• Trimesh Processing" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="260" y="680" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="webRenderer" value="🌐 Web Renderer&#xa;&#xa;• Wis3D Server&#xa;• localhost:8080&#xa;• Interactive 3D View&#xa;• Real-time Animation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="420" y="680" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="outputFiles" value="📁 Output Generator&#xa;&#xa;• Response Files&#xa;• Object Points (Pickle)&#xa;• Motion Samples&#xa;• Visualization Data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="580" y="680" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="apiEndpoints" value="🔌 REST API&#xa;&#xa;FastAPI Server&#xa;• /detect Endpoint&#xa;• /health Endpoint&#xa;• JSON Responses" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="740" y="680" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="azureCloud" value="☁️ Azure Cognitive Services" style="ellipse;whiteSpace=wrap;html=1;fillColor=#0078d4;fontColor=white;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="130" y="210" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="mongoCloud" value="🍃 MongoDB Atlas" style="ellipse;whiteSpace=wrap;html=1;fillColor=#4db33d;fontColor=white;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1240" y="240" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="config" value="⚙️ Configuration&#xa;&#xa;configurations.yaml&#xa;• Model Parameters&#xa;• API Keys&#xa;• Dataset Paths&#xa;• Server Settings" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1240" y="360" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="mainLoop" value="🔄 Main Control Loop&#xa;&#xa;main.py&#xa;• Initialization&#xa;• Health Checks&#xa;• Continuous Processing&#xa;• Session Management&#xa;• Exit Handler (&#39;q&#39;)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="640" width="180" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow1" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="user" target="voiceInterface" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="160" as="sourcePoint" />
+            <mxPoint x="240" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label1" value="Voice Command" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="160" y="140" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="voiceInterface" target="speechToText" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="160" as="sourcePoint" />
+            <mxPoint x="460" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label2" value="Audio WAV" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="400" y="140" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="speechToText" target="languageUnderstanding" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620" y="160" as="sourcePoint" />
+            <mxPoint x="680" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label3" value="Text" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="620" y="140" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="languageUnderstanding" target="memorySystem" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="860" y="160" as="sourcePoint" />
+            <mxPoint x="920" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label4" value="Context" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="860" y="140" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow5" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="languageUnderstanding" target="sceneModule" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="770" y="240" as="sourcePoint" />
+            <mxPoint x="380" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label5" value="Object &amp; Spatial Queries" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="520" y="260" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow6" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="sceneModule" target="motionModule" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="440" as="sourcePoint" />
+            <mxPoint x="680" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label6" value="3D Scene Data &amp; Object Locations" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="600" y="420" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow7" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#666666;" parent="1" source="motionModule" target="visualizationModule" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="920" y="580" as="sourcePoint" />
+            <mxPoint x="600" y="640" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label7" value="SMPL-X Motion Data" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="760" y="600" width="100" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow8" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#0078d4;dashed=1;" parent="1" source="speechToText" target="azureCloud" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620" y="160" as="sourcePoint" />
+            <mxPoint x="1240" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="440" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow9" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#4db33d;dashed=1;" parent="1" source="memorySystem" target="mongoCloud" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1080" y="200" as="sourcePoint" />
+            <mxPoint x="1240" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow10" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#d79b00;dashed=1;" parent="1" source="mainLoop" target="visualizationModule" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1000" y="740" as="sourcePoint" />
+            <mxPoint x="960" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow11" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#82b366;" parent="1" source="stage1Diffuser" target="stage2Diffuser" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="390" as="sourcePoint" />
+            <mxPoint x="900" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="label11" value="Trajectory" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fontColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="880" y="370" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow12" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=#9673a6;" parent="1" source="scanNetLoader" target="pointCloudProcessor" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow13" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=#9673a6;" parent="1" source="pointCloudProcessor" target="spatialAnalyzer" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow14" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=#9673a6;" parent="1" source="scanNetLoader" target="sceneGraph" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="450" as="sourcePoint" />
+            <mxPoint x="270" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arrow15" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=1;strokeColor=#9673a6;" parent="1" source="spatialAnalyzer" target="coordinateManager" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="520" y="450" as="sourcePoint" />
+            <mxPoint x="490" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="legend" value="Legend" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="1240" y="520" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem1" value="─── Data Flow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="550" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem2" value="┅┅┅ External API" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;strokeColor=#0078d4;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="570" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem3" value="🎙️ Voice Processing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fillColor=#dae8fc;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="590" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem4" value="🧠 AI/ML Processing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fillColor=#fff2cc;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="610" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem5" value="🏠 Scene Processing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fillColor=#e1d5e7;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="630" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem6" value="🏃 Motion Generation" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fillColor=#d5e8d4;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="650" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem7" value="🎬 Visualization" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fillColor=#fff2cc;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="670" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legendItem8" value="💾 Data Storage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;fillColor=#f8cecc;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="690" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dataFlow1" value="Natural Language Query" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=9;fontColor=#333333;strokeColor=#cccccc;" parent="1" vertex="1">
+          <mxGeometry x="720" y="255" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dataFlow2" value="Target/Anchor Objects" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=9;fontColor=#333333;strokeColor=#cccccc;" parent="1" vertex="1">
+          <mxGeometry x="590" y="230" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dataFlow3" value="3D Coordinates &amp; Relations" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=9;fontColor=#333333;strokeColor=#cccccc;" parent="1" vertex="1">
+          <mxGeometry x="590" y="470" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="dataFlow4" value="SMPL-X Parameters" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=9;fontColor=#333333;strokeColor=#cccccc;" parent="1" vertex="1">
+          <mxGeometry x="750" y="620" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="metrics" value="📊 Performance Metrics&#xa;&#xa;• Real-time Processing&#xa;• 16kHz Audio Sampling&#xa;• 69D Motion Parameters&#xa;• 6890 Vertex Meshes&#xa;• Interactive Web Rendering" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f3ff;strokeColor=#4d94ff;fontSize=10;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="600" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="techSpecs" value="🛠️ Technical Stack&#xa;&#xa;• Python 3.8+&#xa;• PyTorch &amp; Diffusers&#xa;• Azure Speech SDK&#xa;• MongoDB Atlas&#xa;• FastAPI &amp; Uvicorn&#xa;• Trimesh &amp; Wis3D&#xa;• SMPL-X Library" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f8e6;strokeColor=#6db33f;fontSize=10;verticalAlign=top;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="730" width="160" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow16" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#b85450;dashed=1;" parent="1" source="config" target="mainLoop" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1240" y="420" as="sourcePoint" />
+            <mxPoint x="1180" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="configLabel" value="Configuration" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=9;fontColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="1180" y="540" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow17" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#d6b656;curved=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="408.2611683623238" y="646.17" as="sourcePoint" />
+            <mxPoint x="101.74" y="193.82" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="301.74" y="593.8199999999999" />
+              <mxPoint x="101.74" y="593.8199999999999" />
+              <mxPoint x="81.74" y="503.82" />
+              <mxPoint x="181.74" y="393.82" />
+              <mxPoint x="71.74" y="343.82" />
+              <mxPoint x="101.74" y="293.82" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="outputLabel" value="3D Animation&#xa;Web Interface" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=9;fontColor=#333333;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="50" y="370" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow18" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#b85450;" parent="1" source="memorySystem" target="languageUnderstanding" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="920" y="160" as="sourcePoint" />
+            <mxPoint x="860" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="memoryLabel" value="Context&#xa;Retrieval" style="text;html=1;strokeColor=none;fillColor=#ffffff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=9;fontColor=#333333;strokeColor=#b85450;" parent="1" vertex="1">
+          <mxGeometry x="860" y="100" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

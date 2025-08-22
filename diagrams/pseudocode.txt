@@ -1,0 +1,21 @@
+
+
+initialize SceneGraph with loaded 3D scene
+initialize LLM and Diffusion models
+while True:
+    wait for user to press SPACE (record audio)
+    text = SpeechRecognizer.transcribe("audio_input/input.wav")
+    if text == "" continue
+    # Parse command with LLM
+    prompt = format_prompt_with_context(text, session_memory)
+    llm_output = LLMModel.generate(prompt)
+    target, anchors, action = parse_llm_output(llm_output)
+    # Scene reasoning
+    object_id = SceneGraph.find_object(target, anchors)
+    if object_id is None: ask_for_clarification; continue
+    trajectory = DiffuserNetwork_stage1.generate(object_id, SceneGraph)
+    motion_sequence = DiffuserNetwork_stage2.generate(trajectory)
+    normalized_motion = MotionNormalizer.rescale(motion_sequence)
+    Visualizer.render_motion(normalized_motion, SceneGraph)
+    # Update memory
+    SessionManager.save_interaction(text, target, anchors)

@@ -1,0 +1,531 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="28.1.0" pages="3">
+  <diagram id="Page-1" name="1. Voice Command to Motion">
+    <mxGraphModel dx="1678" dy="874" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title1" value="EchomotionAI : Sequence Graph" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2c5282;" parent="1" vertex="1">
+          <mxGeometry x="400" y="40" width="800" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="user1" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#e1f5fe;strokeColor=#01579b;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="80" y="100" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="main1" value="MainController&#xa;(main.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57f17;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="200" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="speech1" value="SpeechService&#xa;(Audio Recorder)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="400" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="scene1" value="SceneGraph&#xa;(scene_graph.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#2e7d32;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="600" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="llm1" value="LLMModel&#xa;(RLHF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="800" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="diffuser1" value="DiffuserNetwork&#xa;(two_stage.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2f1;strokeColor=#00695c;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="viz1" value="Visualizer&#xa;(visualize_results.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f9a825;fontStyle=1;verticalAlign=top;" parent="1" vertex="1">
+          <mxGeometry x="1200" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_user1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#01579b;fillColor=#e1f5fe;" parent="1" vertex="1">
+          <mxGeometry x="90" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_main1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#f57f17;fillColor=#fff3e0;" parent="1" vertex="1">
+          <mxGeometry x="255" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_speech1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#7b1fa2;fillColor=#f3e5f5;" parent="1" vertex="1">
+          <mxGeometry x="455" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_scene1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#2e7d32;fillColor=#e8f5e8;" parent="1" vertex="1">
+          <mxGeometry x="655" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_llm1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#c2185b;fillColor=#fce4ec;" parent="1" vertex="1">
+          <mxGeometry x="855" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_diffuser1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#00695c;fillColor=#e0f2f1;" parent="1" vertex="1">
+          <mxGeometry x="1055" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_viz1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#f9a825;fillColor=#fff8e1;" parent="1" vertex="1">
+          <mxGeometry x="1255" y="180" width="10" height="700" as="geometry" />
+        </mxCell>
+        <mxCell id="msg1_1" value="1: Press SPACE + Voice Command&#xa;&quot;sit on the chair near the table&quot;" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;fontStyle=1;" parent="1" edge="1">
+          <mxGeometry x="-0.4839" y="-40" width="80" relative="1" as="geometry">
+            <mxPoint x="100" y="210" as="sourcePoint" />
+            <mxPoint x="255" y="210" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_2" value="2: capture_audio()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="240" as="sourcePoint" />
+            <mxPoint x="455" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_3" value="3: audio_data (WAV file)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="455" y="270" as="sourcePoint" />
+            <mxPoint x="265" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_4" value="4: transcribe_audio_to_text()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="300" as="sourcePoint" />
+            <mxPoint x="655" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_5" value="5: &quot;sit on the chair near the table&quot;" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="655" y="330" as="sourcePoint" />
+            <mxPoint x="265" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_6" value="6: process_natural_language(text, scene_context)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry x="0.001" width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="360" as="sourcePoint" />
+            <mxPoint x="855" y="360" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_8" value="8: {target: &quot;chair&quot;, anchor: &quot;table&quot;, relation: &quot;near&quot;}" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="855" y="440" as="sourcePoint" />
+            <mxPoint x="265" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_9" value="9: find_object_positions(target, anchor, relation)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="470" as="sourcePoint" />
+            <mxPoint x="655" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_11" value="11: object_coordinates, scene_constraints" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="655" y="550" as="sourcePoint" />
+            <mxPoint x="265" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_15" value="15: motion_sequence (SMPL-X parameters)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1055" y="710" as="sourcePoint" />
+            <mxPoint x="265" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_16" value="16: visualize_motion(motion_data, scene)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="740" as="sourcePoint" />
+            <mxPoint x="1255" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_17" value="17: 3D Animation &#xa;(localhost:8080)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1255" y="770" as="sourcePoint" />
+            <mxPoint x="100" y="770" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="activation1_1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#bbdefb;strokeColor=#1976d2;" parent="1" vertex="1">
+          <mxGeometry x="250" y="200" width="20" height="580" as="geometry" />
+        </mxCell>
+        <mxCell id="activation1_2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#e1bee7;strokeColor=#7b1fa2;" parent="1" vertex="1">
+          <mxGeometry x="450" y="230" width="20" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="activation1_3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#c8e6c9;strokeColor=#2e7d32;" parent="1" vertex="1">
+          <mxGeometry x="650" y="290" width="20" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="activation1_4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f8bbd9;strokeColor=#c2185b;" parent="1" vertex="1">
+          <mxGeometry x="850" y="350" width="20" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="activation1_5" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#b2dfdb;strokeColor=#00695c;" parent="1" vertex="1">
+          <mxGeometry x="1050" y="570" width="20" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="activation1_6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#fff9c4;strokeColor=#f9a825;" parent="1" vertex="1">
+          <mxGeometry x="1250" y="730" width="20" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="msg1_10" value="10: scenegraph_relationship()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="655" y="500" as="sourcePoint" />
+            <mxPoint x="655" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_7" value="7: load_gt_scene()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="655" y="390" as="sourcePoint" />
+            <mxPoint x="655" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_13" value="13: stage1_trajectory_generation()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry x="0.0588" width="80" relative="1" as="geometry">
+            <mxPoint x="1055" y="610" as="sourcePoint" />
+            <mxPoint x="1055" y="630" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_14" value="14: stage2_full_motion_generation(trajectory)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1055" y="660" as="sourcePoint" />
+            <mxPoint x="1055" y="680" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg1_12" value="12: generate_motion(task, scene_info, object_coords)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="580" as="sourcePoint" />
+            <mxPoint x="1055" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Page-2" name="2. Chat-Based Object Detection">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title2" value="4.4.4.2 Chat-Based Object Detection Sequence" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2c5282;" vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="800" height="30" as="geometry" />
+        </mxCell>
+        <!-- Actors -->
+        <mxCell id="client2" value="Client&#xa;Application" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3f2fd;strokeColor=#1565c0;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="150" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Components -->
+        <mxCell id="fastapi2" value="FastAPI&#xa;Server" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57f17;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="350" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="detect_endpoint2" value="/detect&#xa;Endpoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="550" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="session2" value="SessionManager&#xa;(MongoDB)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#2e7d32;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="750" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="llm2" value="LLMModel&#xa;(RLHF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="950" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="scene2" value="SceneGraph&#xa;(Context)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2f1;strokeColor=#00695c;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Lifelines -->
+        <mxCell id="lifeline_client2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#1565c0;fillColor=#e3f2fd;" vertex="1" parent="1">
+          <mxGeometry x="205" y="180" width="10" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_fastapi2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#f57f17;fillColor=#fff3e0;" vertex="1" parent="1">
+          <mxGeometry x="405" y="180" width="10" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_detect2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#7b1fa2;fillColor=#f3e5f5;" vertex="1" parent="1">
+          <mxGeometry x="605" y="180" width="10" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_session2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#2e7d32;fillColor=#e8f5e8;" vertex="1" parent="1">
+          <mxGeometry x="805" y="180" width="10" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_llm2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#c2185b;fillColor=#fce4ec;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="180" width="10" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_scene2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#00695c;fillColor=#e0f2f1;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="180" width="10" height="500" as="geometry" />
+        </mxCell>
+        <!-- Messages -->
+        <!-- 1. POST request -->
+        <mxCell id="msg2_1" value="1: POST /detect&#xa;{&quot;text&quot;: &quot;put the book on the table&quot;, &quot;session_id&quot;: &quot;user123&quot;}" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="215" y="210" as="sourcePoint" />
+            <mxPoint x="405" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 2. Route to endpoint -->
+        <mxCell id="msg2_2" value="2: route_to_detect_endpoint()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="415" y="240" as="sourcePoint" />
+            <mxPoint x="605" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 3. Get session context -->
+        <mxCell id="msg2_3" value="3: get_session_context(session_id)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="615" y="270" as="sourcePoint" />
+            <mxPoint x="805" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 4. MongoDB query -->
+        <mxCell id="msg2_4" value="4: db.conversations.find({session_id})" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="805" y="300" as="sourcePoint" />
+            <mxPoint x="805" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 5. Conversation history -->
+        <mxCell id="msg2_5" value="5: conversation_history[]" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="805" y="350" as="sourcePoint" />
+            <mxPoint x="615" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 6. Get scene context -->
+        <mxCell id="msg2_6" value="6: get_scene_context()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="615" y="380" as="sourcePoint" />
+            <mxPoint x="1205" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 7. Scene objects -->
+        <mxCell id="msg2_7" value="7: scene_objects, spatial_relations" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1205" y="410" as="sourcePoint" />
+            <mxPoint x="615" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 8. Process with LLM -->
+        <mxCell id="msg2_8" value="8: process_text_with_context(text, history, scene)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="615" y="440" as="sourcePoint" />
+            <mxPoint x="1005" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 9. RLHF inference -->
+        <mxCell id="msg2_9" value="9: rlhf_inference(prompt)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1005" y="470" as="sourcePoint" />
+            <mxPoint x="1005" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 10. Object identification -->
+        <mxCell id="msg2_10" value="10: {&quot;target&quot;: &quot;book&quot;, &quot;anchor&quot;: &quot;table&quot;, &quot;relation&quot;: &quot;on&quot;}" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1005" y="520" as="sourcePoint" />
+            <mxPoint x="615" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 11. Store interaction -->
+        <mxCell id="msg2_11" value="11: store_interaction(session_id, text, result)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="615" y="550" as="sourcePoint" />
+            <mxPoint x="805" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 12. Return JSON -->
+        <mxCell id="msg2_12" value="12: HTTP 200 OK&#xa;{&quot;objects&quot;: [{&quot;target&quot;: &quot;book&quot;, &quot;anchor&quot;: &quot;table&quot;, &quot;relation&quot;: &quot;on&quot;}]}" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="615" y="580" as="sourcePoint" />
+            <mxPoint x="415" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 13. Response to client -->
+        <mxCell id="msg2_13" value="13: JSON Response" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="405" y="610" as="sourcePoint" />
+            <mxPoint x="215" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Activation boxes -->
+        <mxCell id="activation2_1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#bbdefb;strokeColor=#1976d2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="20" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="activation2_2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#ffe0b2;strokeColor=#f57f17;" vertex="1" parent="1">
+          <mxGeometry x="400" y="200" width="20" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="activation2_3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#e1bee7;strokeColor=#7b1fa2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="230" width="20" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="activation2_4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#c8e6c9;strokeColor=#2e7d32;" vertex="1" parent="1">
+          <mxGeometry x="800" y="260" width="20" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="activation2_5" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f8bbd9;strokeColor=#c2185b;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="430" width="20" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="activation2_6" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#b2dfdb;strokeColor=#00695c;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="370" width="20" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="Page-3" name="3. Memory Retrieval">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Title -->
+        <mxCell id="title3" value="4.4.4.3 Memory Retrieval for Context-Aware Processing" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1;fontColor=#2c5282;" vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="800" height="30" as="geometry" />
+        </mxCell>
+        <!-- Actors -->
+        <mxCell id="user3" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#e1f5fe;strokeColor=#01579b;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="30" height="60" as="geometry" />
+        </mxCell>
+        <!-- Components -->
+        <mxCell id="main3" value="MainController&#xa;(main.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e0;strokeColor=#f57f17;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="200" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="session3" value="SessionManager&#xa;(scene_graph.py)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#2e7d32;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="mongodb3" value="MongoDB&#xa;Database" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#7b1fa2;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="600" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="llm3" value="LLMModel&#xa;(Context-Aware)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fce4ec;strokeColor=#c2185b;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="800" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="scene3" value="SceneGraph&#xa;(Object Resolution)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2f1;strokeColor=#00695c;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="100" width="120" height="60" as="geometry" />
+        </mxCell>
+        <!-- Lifelines -->
+        <mxCell id="lifeline_user3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#01579b;fillColor=#e1f5fe;" vertex="1" parent="1">
+          <mxGeometry x="90" y="180" width="10" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_main3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#f57f17;fillColor=#fff3e0;" vertex="1" parent="1">
+          <mxGeometry x="255" y="180" width="10" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_session3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#2e7d32;fillColor=#e8f5e8;" vertex="1" parent="1">
+          <mxGeometry x="455" y="180" width="10" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_mongodb3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#7b1fa2;fillColor=#f3e5f5;" vertex="1" parent="1">
+          <mxGeometry x="655" y="180" width="10" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_llm3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#c2185b;fillColor=#fce4ec;" vertex="1" parent="1">
+          <mxGeometry x="855" y="180" width="10" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="lifeline_scene3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};strokeColor=#00695c;fillColor=#e0f2f1;" vertex="1" parent="1">
+          <mxGeometry x="1055" y="180" width="10" height="600" as="geometry" />
+        </mxCell>
+        <!-- Messages -->
+        <!-- 1. First interaction -->
+        <mxCell id="msg3_1" value="1: &quot;Place the red chair near the window&quot;" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="100" y="210" as="sourcePoint" />
+            <mxPoint x="255" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 2. Initialize session -->
+        <mxCell id="msg3_2" value="2: initialize_session(user_id)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="240" as="sourcePoint" />
+            <mxPoint x="455" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 3. Store first interaction -->
+        <mxCell id="msg3_3" value="3: store_interaction({user_id, text, objects: [red_chair, window]})" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="465" y="270" as="sourcePoint" />
+            <mxPoint x="655" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 4. Process and respond -->
+        <mxCell id="msg3_4" value="4: [Process first command successfully]" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="255" y="300" as="sourcePoint" />
+            <mxPoint x="100" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Separator -->
+        <mxCell id="separator3" value="--- Second Interaction with Context ---" style="text;html=1;strokeColor=#666666;fillColor=#f5f5f5;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="200" y="330" width="800" height="30" as="geometry" />
+        </mxCell>
+        <!-- 5. Second interaction with pronoun -->
+        <mxCell id="msg3_5" value="5: &quot;Move it to the opposite corner&quot;" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#d32f2f;fontColor=#d32f2f;fontStyle=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="100" y="380" as="sourcePoint" />
+            <mxPoint x="255" y="380" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 6. Request context -->
+        <mxCell id="msg3_6" value="6: get_conversation_history(user_id, limit=5)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="410" as="sourcePoint" />
+            <mxPoint x="455" y="410" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 7. MongoDB query -->
+        <mxCell id="msg3_7" value="7: db.conversations.find({user_id}).sort({timestamp: -1}).limit(5)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="465" y="440" as="sourcePoint" />
+            <mxPoint x="655" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 8. Return conversation history -->
+        <mxCell id="msg3_8" value="8: [{text: &quot;Place red chair near window&quot;, objects: [red_chair, window], timestamp}]" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="655" y="470" as="sourcePoint" />
+            <mxPoint x="465" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 9. Build context prompt -->
+        <mxCell id="msg3_9" value="9: build_context_prompt(current_text, history)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="465" y="500" as="sourcePoint" />
+            <mxPoint x="465" y="520" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 10. Context-aware LLM call -->
+        <mxCell id="msg3_10" value="10: process_with_context(&#xa;&quot;Previous: Place red chair near window&#xa;Current: Move it to opposite corner&quot;)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="465" y="550" as="sourcePoint" />
+            <mxPoint x="855" y="550" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 11. Pronoun resolution -->
+        <mxCell id="msg3_11" value="11: resolve_pronouns_with_context()" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="855" y="580" as="sourcePoint" />
+            <mxPoint x="855" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 12. Resolved objects -->
+        <mxCell id="msg3_12" value="12: {target: &quot;red_chair&quot;, anchor: &quot;corner&quot;, relation: &quot;at&quot;, context_resolved: true}" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="855" y="630" as="sourcePoint" />
+            <mxPoint x="465" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 13. Find object in scene -->
+        <mxCell id="msg3_13" value="13: locate_object_by_context(red_chair, previous_position)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="465" y="660" as="sourcePoint" />
+            <mxPoint x="1055" y="660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 14. Object located -->
+        <mxCell id="msg3_14" value="14: chair_found_at_window, target_corner_coordinates" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="1055" y="690" as="sourcePoint" />
+            <mxPoint x="465" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 15. Update memory -->
+        <mxCell id="msg3_15" value="15: store_interaction({user_id, text: &quot;Move it to corner&quot;, &#xa;resolved_objects: [red_chair], target_location: corner})" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#1976d2;fontColor=#1976d2;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="465" y="720" as="sourcePoint" />
+            <mxPoint x="655" y="720" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- 16. Success response -->
+        <mxCell id="msg3_16" value="16: Context successfully resolved: &#xa;&quot;it&quot; → &quot;red chair&quot; (from previous interaction)" style="html=1;verticalAlign=bottom;endArrow=block;endSize=8;curved=0;rounded=0;strokeColor=#388e3c;fontColor=#388e3c;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="265" y="750" as="sourcePoint" />
+            <mxPoint x="100" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <!-- Activation boxes -->
+        <mxCell id="activation3_1" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#bbdefb;strokeColor=#1976d2;" vertex="1" parent="1">
+          <mxGeometry x="250" y="200" width="20" height="560" as="geometry" />
+        </mxCell>
+        <mxCell id="activation3_2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#c8e6c9;strokeColor=#2e7d32;" vertex="1" parent="1">
+          <mxGeometry x="450" y="230" width="20" height="530" as="geometry" />
+        </mxCell>
+        <mxCell id="activation3_3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#e1bee7;strokeColor=#7b1fa2;" vertex="1" parent="1">
+          <mxGeometry x="650" y="260" width="20" height="470" as="geometry" />
+        </mxCell>
+        <mxCell id="activation3_4" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f8bbd9;strokeColor=#c2185b;" vertex="1" parent="1">
+          <mxGeometry x="850" y="540" width="20" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="activation3_5" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#b2dfdb;strokeColor=#00695c;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="650" width="20" height="50" as="geometry" />
+        </mxCell>
+        <!-- Notes for context explanation -->
+        <mxCell id="note3_1" value="Memory Context:&#xa;• Previous: &quot;red chair near window&quot;&#xa;• Current: &quot;Move it to corner&quot;&#xa;• Resolved: &quot;it&quot; = red chair&#xa;• Action: Move red chair from window to corner" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff8e1;strokeColor=#f57c00;align=left;verticalAlign=top;fontFamily=monospace;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="400" width="280" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="note3_2" value="MongoDB Document Structure:&#xa;{&#xa;  _id: ObjectId,&#xa;  user_id: &quot;user123&quot;,&#xa;  timestamp: ISODate,&#xa;  text: &quot;Place red chair near window&quot;,&#xa;  objects: {&#xa;    target: &quot;red_chair&quot;,&#xa;    anchor: &quot;window&quot;,&#xa;    relation: &quot;near&quot;&#xa;  },&#xa;  resolved_objects: [&quot;red_chair&quot;],&#xa;  scene_context: {...}&#xa;}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f5e8;strokeColor=#4caf50;align=left;verticalAlign=top;fontFamily=monospace;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="540" width="300" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

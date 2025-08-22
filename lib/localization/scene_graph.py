@@ -6,7 +6,7 @@ import datetime
 import pymongo
 import numpy as np
 from pymongo import MongoClient
-
+import time
 import azure.cognitiveservices.speech as speechsdk
 import numpy as np
 from shapely.geometry import MultiPoint
@@ -470,9 +470,11 @@ PREVIOUS CONVERSATION HISTORY:\n"""
 
     def inference(self, batch):
         scene_id = batch['meta']['scene_id']
+        transcribe_start_time = time.time()
         text = transcribe_audio_to_text()
+        transcribe_end_time = time.time()
         print(f'Text is {text}')
-        
+        print(f"Time Take for Azure Speech to text {transcribe_end_time - transcribe_start_time:.2f} seconds")
         if self.mode == 'gt':
             self.load_gt_scene(batch)
         

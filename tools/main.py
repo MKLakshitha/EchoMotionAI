@@ -400,10 +400,13 @@ if __name__ == '__main__':
             parser.add_argument("--is_test", action="store_true", default=True)
             parser.add_argument("opts", default=None, nargs=argparse.REMAINDER)
             args = parser.parse_args()
+            print(args)
             cfg = initialize_cfg(args)
-            
+            start_time = time.time()
             # Always run in continuous mode
             run_continuous_processing(cfg)
+            end_time = time.time()
+            print(f"Processing completed in {end_time - start_time:.2f} seconds")
             
     except KeyboardInterrupt:
         print("\nExiting program...")

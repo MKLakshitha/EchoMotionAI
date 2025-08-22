@@ -6,7 +6,7 @@ import torch
 from unsloth import FastLanguageModel
 from vllm import SamplingParams
 import logging
-
+import time
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -30,7 +30,10 @@ sampling_params = None
 
 # System prompt and examples
 SYSTEM_PROMPT = """
-You are an assistant that helps people find objects in a room. You are given a list of objects in a room together with a text descriptions. You should determine the target object and anchor object in the text description and map it to the objects in the room. If the object is in the room, just pick it. However, if the object cannot be find in the room, you should pick a room object that is the most similar to the target object.
+You are an assistant that helps people find objects in a room. You are given a list of objects in a room together 
+with a text descriptions. You should determine the target object and anchor object in the text description and map it
+to the objects in the room. If the object is in the room, just pick it. However, if the object cannot be find in the room,
+you should pick a room object that is the most similar to the target object.
 Extract only the target object name that the user says where the action is needed to be performed.
 
 Respond Exactly in the following format do not change the Below Format:
@@ -109,7 +112,7 @@ async def load_model():
 def parse_model_output(output: str) -> tuple:
     """Parse the model output to extract reasoning, target, and anchor"""
     try:
-        print(f"Raw model output: {output}")
+
         # Extract reasoning
         reasoning_start = output.find("<reasoning>")
         reasoning_end = output.find("</reasoning>")
@@ -154,6 +157,8 @@ async def detect_object(request: ObjectDetectionRequest):
     
     try:
         # Create the prompt with room objects context
+        start_time = time.time()
+        logger.info("Starting inference...")
         room_objects_text = ", ".join(request.room_objects)
         user_prompt = f"Assume the room has: {room_objects_text}.\nUser request: {request.message}"
         
@@ -176,6 +181,10 @@ async def detect_object(request: ObjectDetectionRequest):
         print(f"Reasoning: {reasoning}")
         print(f"Target: {target}")
         print(f"Anchor: {anchor}")
+        print(f"Room Contains: {room_objects_text}")
+        end_time = time.time()
+        
+        logger.info(f"Inference completed in {end_time - start_time:.2f} seconds")
         return ObjectDetectionResponse(
             target=target,
             anchor=anchor,

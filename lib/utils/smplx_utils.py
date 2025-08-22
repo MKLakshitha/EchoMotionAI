@@ -76,41 +76,41 @@ class BodyModelSMPLX(nn.Module):
                 continue
             batch_size = max(batch_size, len(var))
 
-        logging.debug(f"Batch size determined: {batch_size}")
+   
 
         # Log default values being set
         if global_orient is None:
-            logging.debug("Setting default global_orient.")
+      
             global_orient = torch.zeros([batch_size, 3], dtype=dtype, device=device)
         if body_pose is None:
-            logging.debug("Setting default body_pose.")
+  
             body_pose = torch.zeros(3 * self.bm.NUM_BODY_JOINTS, device=device,
                                     dtype=dtype)[None].expand(batch_size, -1).contiguous()
         if left_hand_pose is None:
-            logging.debug("Setting default left_hand_pose.")
+            
             left_hand_pose = torch.zeros(self.hand_pose_dim, device=device, dtype=dtype)[
                 None].expand(batch_size, -1).contiguous()
         if right_hand_pose is None:
-            logging.debug("Setting default right_hand_pose.")
+           
             right_hand_pose = torch.zeros(self.hand_pose_dim, device=device, dtype=dtype)[
                 None].expand(batch_size, -1).contiguous()
         if jaw_pose is None:
-            logging.debug("Setting default jaw_pose.")
+           
             jaw_pose = torch.zeros([batch_size, 3], dtype=dtype, device=device)
         if leye_pose is None:
-            logging.debug("Setting default leye_pose.")
+          
             leye_pose = torch.zeros([batch_size, 3], dtype=dtype, device=device)
         if reye_pose is None:
-            logging.debug("Setting default reye_pose.")
+     
             reye_pose = torch.zeros([batch_size, 3], dtype=dtype, device=device)
         if expression is None:
-            logging.debug("Setting default expression.")
+           
             expression = torch.zeros([batch_size, self.bm.num_expression_coeffs], dtype=dtype, device=device)
         if betas is None:
-            logging.debug("Setting default betas.")
+      
             betas = torch.zeros([batch_size, self.bm.num_betas], dtype=dtype, device=device)
         if transl is None:
-            logging.debug("Setting default transl.")
+     
             transl = torch.zeros([batch_size, 3], dtype=dtype, device=device)
 
         bm_out = self.bm(

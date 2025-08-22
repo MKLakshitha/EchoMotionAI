@@ -68,6 +68,10 @@ Please note that anchors should be split by ",".
 4. Stand up from the chair that is next to the tables. Please answer:
     target: sofa chair
     anchor: table
+5. Sit on the couch that is near the bag. Please answer:
+    target: couch
+    anchor: bag
+If the user has mentioned a previous locations decide it based on the context.
     """
 
 
@@ -90,3 +94,7 @@ output = model.fast_generate(
 )[0].outputs[0].text
 
 print(output)
+
+
+
+

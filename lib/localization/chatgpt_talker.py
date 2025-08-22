@@ -7,6 +7,7 @@ from openai import AzureOpenAI
 import logging
 import requests
 import json
+import torch
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -160,31 +161,49 @@ class ChatGPTTalker():
     def check_objects(self, response, all_objects):
         lines = response['response'].split('\n')
         flag_target = False
-        flat_anchor = False
+        flag_anchor = False  # Fixed typo: was 'flat_anchor'
+        target_object = None
+        anchor_objects = []
+        
+        # Create a copy of all_objects to avoid modifying during iteration
+        available_objects = all_objects.copy()
+        
         for line in lines:
             line = line.lower()
             if 'target:' in line:
                 flag_target = True
                 idx = line.find('target:')
                 target_object = line[idx+7:].strip()
-                if target_object not in all_objects:
-                    target_object, sim = classify(target_object, all_objects)
-                all_objects.remove(target_object)
+                if target_object not in available_objects:
+                    result = classify(target_object, available_objects)
+                    if result[0] is not None:
+                        target_object = result[0]
+                        available_objects.remove(target_object)
+                else:
+                    available_objects.remove(target_object)
+                    
             if 'anchor:' in line:
-                flat_anchor = True
+                flag_anchor = True
                 if 'none' in line:
                     anchor_objects = []
                 else:
                     idx = line.find('anchor:')
                     anchor_objects = line[idx+7:].strip().split(',')
                     for i in range(len(anchor_objects)):
-                        if anchor_objects[i] not in all_objects:
-                            anchor_objects[i], sim = classify(anchor_objects[i], all_objects)
-                        all_objects.remove(anchor_objects[i])
-        if not flag_target or not flat_anchor:
+                        anchor_objects[i] = anchor_objects[i].strip()  # Remove whitespace
+                        if anchor_objects[i] not in available_objects:
+                            result = classify(anchor_objects[i], available_objects)
+                            if result[0] is not None:
+                                anchor_objects[i] = result[0]
+                                if anchor_objects[i] in available_objects:
+                                    available_objects.remove(anchor_objects[i])
+                        else:
+                            available_objects.remove(anchor_objects[i])
+        
+        if not flag_target or not flag_anchor:
             return None, None
+        
         return target_object, anchor_objects
-   
     def check_target(self, response, all_objects):
         lines = response["response"].split('\n')
  
@@ -209,7 +228,7 @@ class ChatGPTTalker():
         target_object = None
         while target_object is None:
             response = self.ask_objects_gpt(text, all_objects, conversation_context)
-            logger.info(f"Response from GPT: \n{response['response']}")
+            logger.info(f"\nResponse from GPT: \n{response['response']}")
             target_object, anchor_objects = self.check_objects(response, all_objects)
         return target_object, anchor_objects, response
  
@@ -238,17 +257,59 @@ for p in clip_model.parameters():
     p.requires_grad_(False)
 clip_model = clip_model.cuda()
  
+# def clip_feat(w):
+#     text_token = clip.tokenize(w).cuda()
+#     with torch.no_grad():
+#         text_feature = clip_model.encode_text(text_token)
+#     # Ensure numpy output (1, D) → (D,)
+#     return text_feature.cpu().numpy()[0]
+
+ 
+
+
 def clip_feat(w):
     text_token = clip.tokenize(w)
     text_feature = clip_model.encode_text(text_token.cuda()).cpu()
-    # text_feature = clip_model.encode_text(text_token).cpu()
-    return text_feature
+    # Convert to numpy array and detach from computation graph
+    return text_feature.detach().numpy()
+
  
 def similarity(phrase1, phrase2):
     v1 = clip_feat(phrase1)[0]
     v2 = clip_feat(phrase2)[0]
-    return np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+    # Ensure both vectors are numpy arrays
+    v1 = np.array(v1) if not isinstance(v1, np.ndarray) else v1
+    v2 = np.array(v2) if not isinstance(v2, np.ndarray) else v2
+    
+    # Calculate cosine similarity
+    dot_product = np.dot(v1, v2)
+    norms = np.linalg.norm(v1) * np.linalg.norm(v2)
+    
+    # Avoid division by zero
+    if norms == 0:
+        return 0.0
+    
+    return dot_product / norms
+
  
 def classify(word, classes):
-    similarities = [similarity(word[:77], c) for c in classes]
-    return classes[similarities.index(max(similarities))], max(similarities)
+    if not classes:  # Handle empty classes list
+        return None, 0.0
+    
+    # Truncate word to 77 characters (CLIP's max token length)
+    truncated_word = word[:77] if len(word) > 77 else word
+    
+    similarities = []
+    for c in classes:
+        try:
+            sim = similarity(truncated_word, c)
+            similarities.append(sim)
+        except Exception as e:
+            print(f"Warning: Could not compute similarity for '{truncated_word}' and '{c}': {e}")
+            similarities.append(0.0)
+    
+    if not similarities or max(similarities) == 0:
+        return classes[0], 0.0  # Return first class as fallback
+    
+    max_idx = similarities.index(max(similarities))
+    return classes[max_idx], max(similarities)

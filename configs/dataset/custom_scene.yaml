@@ -2,7 +2,7 @@ test_dat:
   name: HumaniseMotion
   limit_size: 1
   split: test
-  scene_id: "scene0633_01"  # Change this to your desired scene ID
+  scene_id: "scene0603_00"  #scene0633_01 #scene0603_00 #scene0600_00 Change this to your desired scene ID
 
 dat_cfg:
   humanise_root: data/HUMANISE

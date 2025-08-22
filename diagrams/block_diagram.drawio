@@ -1,0 +1,142 @@
+<mxfile host="65bd71144e">
+    <diagram name="EchoMotionAI" id="echo-motion-ai">
+        <mxGraphModel dx="1258" dy="1126" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="EchoMotionAI: Block Diagram" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1;fontColor=#111827;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="20" width="600" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="audio-recorder" value="&lt;div&gt;&lt;b&gt;AudioRecorder&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Voice Input&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(1)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#4F46E5;strokeColor=#7C3AED;fontColor=#FFFFFF;gradientColor=#7C3AED;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="80" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="speech-recognizer" value="&lt;div&gt;&lt;b&gt;SpeechRecognizer&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Azure SDK&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(2)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#059669;strokeColor=#0891B2;fontColor=#FFFFFF;gradientColor=#0891B2;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="75" y="180" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="session-management" value="&lt;div&gt;&lt;b&gt;Session&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Management&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(3a)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#059669;strokeColor=#0891B2;fontColor=#FFFFFF;gradientColor=#0891B2;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="300" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="memory" value="&lt;div&gt;&lt;b&gt;Memory&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Context Store&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(3b)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#059669;strokeColor=#0891B2;fontColor=#FFFFFF;gradientColor=#0891B2;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="380" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="llm-module" value="&lt;div&gt;&lt;b&gt;LLMModule&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Chain-of-Thought&lt;/div&gt;&lt;div&gt;Analysis&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b style=&quot;color: rgb(255, 228, 225);&quot;&gt;RLHF + GRPO&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Reinforcement Learning&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(3)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DC2626;strokeColor=#EA580C;fontColor=#FFFFFF;gradientColor=#EA580C;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="310" width="160" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="scene-module" value="&lt;div&gt;&lt;b&gt;SceneModule&lt;/b&gt;&lt;/div&gt;&lt;div&gt;3D Scene &amp;amp; Objects&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(4)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#059669;strokeColor=#0891B2;fontColor=#FFFFFF;gradientColor=#0891B2;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="420" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="motion-planner" value="&lt;div&gt;&lt;b&gt;MotionPlanner&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Diffusion Stage-1&lt;/div&gt;&lt;div&gt;Path Planning&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(5a)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DC2626;strokeColor=#EA580C;fontColor=#FFFFFF;gradientColor=#EA580C;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="240" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="motion-synthesizer" value="&lt;div&gt;&lt;b&gt;MotionSynthesizer&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Diffusion Stage-2&lt;/div&gt;&lt;div&gt;Pose Generation&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(5b)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DC2626;strokeColor=#EA580C;fontColor=#FFFFFF;gradientColor=#EA580C;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="700" y="360" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="normalizer" value="&lt;div&gt;&lt;b&gt;Normalizer&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Motion Scaling&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(6)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#059669;strokeColor=#0891B2;fontColor=#FFFFFF;gradientColor=#0891B2;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="250" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="visualizer" value="&lt;div&gt;&lt;b&gt;Visualizer&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Final 3D&lt;/div&gt;&lt;div&gt;Animation&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;(7)&lt;/font&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#7C2D12;strokeColor=#92400E;fontColor=#FFFFFF;gradientColor=#92400E;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="400" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="arrow-1-2" value="Audio Signal" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="audio-recorder" target="speech-recognizer" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="150" y="140" as="sourcePoint"/>
+                        <mxPoint x="150" y="180" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-2-3a" value="Text Input" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="speech-recognizer" target="session-management" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="150" y="240" as="sourcePoint"/>
+                        <mxPoint x="150" y="300" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-2-3b" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.003;entryY=0.147;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="speech-recognizer" target="memory" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="150" y="240" as="sourcePoint"/>
+                        <mxPoint x="150" y="390" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="40" y="240"/>
+                            <mxPoint x="40" y="390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-3a-3" value="Session Data" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="session-management" target="llm-module" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="210" y="330" as="sourcePoint"/>
+                        <mxPoint x="280" y="360" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="260" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-3b-3" value="Context" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="memory" target="llm-module" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="210" y="420" as="sourcePoint"/>
+                        <mxPoint x="280" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-2-3" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;curved=1;entryX=0.013;entryY=0.163;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="speech-recognizer" target="llm-module" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="220" y="210" as="sourcePoint"/>
+                        <mxPoint x="280" y="360" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250" y="210"/>
+                            <mxPoint x="250" y="360"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-3-4" value="Objects &amp; Actions" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="llm-module" target="scene-module" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="440" y="370" as="sourcePoint"/>
+                        <mxPoint x="500" y="350" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="530" y="390"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-3-5a" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;curved=1;" parent="1" source="llm-module" target="motion-planner" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="440" y="350" as="sourcePoint"/>
+                        <mxPoint x="700" y="280" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="570" y="350"/>
+                            <mxPoint x="570" y="280"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-4-5a" value="Scene Data" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="scene-module" target="motion-planner" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="640" y="340" as="sourcePoint"/>
+                        <mxPoint x="700" y="300" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="670" y="350"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-5a-5b" value="Path Data" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="motion-planner" target="motion-synthesizer" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="770" y="320" as="sourcePoint"/>
+                        <mxPoint x="770" y="360" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-5b-6" value="Raw Motion" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="motion-synthesizer" target="normalizer" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="840" y="390" as="sourcePoint"/>
+                        <mxPoint x="900" y="330" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="arrow-6-7" value="Normalized Motion" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;strokeColor=#374151;labelBackgroundColor=#F9FAFB;fontColor=#6B7280;" parent="1" source="normalizer" target="visualizer" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="970" y="360" as="sourcePoint"/>
+                        <mxPoint x="970" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="impl-details" value="&lt;div&gt;&lt;b&gt;Implementation Details&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;🖥️ &lt;b&gt;GPU Acceleration:&lt;/b&gt; Diffusion Models (5a, 5b)&lt;/div&gt;&lt;div&gt;🐍 &lt;b&gt;Python Implementation:&lt;/b&gt; All modules written in Python&lt;/div&gt;&lt;div&gt;🧠 &lt;b&gt;RLHF Training:&lt;/b&gt; GRPO Optimization&lt;/div&gt;&lt;div&gt;💾 &lt;b&gt;Context Management:&lt;/b&gt; Session + Memory Modules&lt;/div&gt;&lt;div&gt;☁️ &lt;b&gt;Cloud Integration:&lt;/b&gt; Azure Speech SDK&lt;/div&gt;&lt;div&gt;🤖 &lt;b&gt;AI Models:&lt;/b&gt; LLM + Diffusion Models&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;EchoMotionAI System Flow:&lt;/b&gt; Voice input → Speech recognition → Context-aware LLM analysis (with RLHF/GRPO optimization, session management, and memory context) → Scene loading → Motion planning → Motion synthesis → Normalization → 3D visualization.&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3F4F6;strokeColor=#D1D5DB;fontColor=#111827;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="520" width="960" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend" value="&lt;div&gt;&lt;b&gt;Module Types&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;color: rgb(79, 70, 229);&quot;&gt;🟦 Input Processing&lt;/div&gt;&lt;div style=&quot;color: rgb(5, 150, 105);&quot;&gt;🟩 Data Processing&lt;/div&gt;&lt;div style=&quot;color: rgb(220, 38, 38);&quot;&gt;🟥 AI/ML Modules&lt;/div&gt;&lt;div style=&quot;color: rgb(124, 45, 18);&quot;&gt;🟫 Output Generation&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#D1D5DB;fontColor=#111827;align=left;verticalAlign=top;spacingLeft=10;spacingTop=10;" parent="1" vertex="1">
+                    <mxGeometry x="1020" y="100" width="160" height="120" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
