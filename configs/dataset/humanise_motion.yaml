@@ -12,13 +12,13 @@ test_dat:
   name: HumaniseMotion
   limit_size: 1
   split: test
-  scene_id: "scene0663_00" 
+  scene_id: "scene0600_00" 
   #scene0663_00
   #scene0677_00
   #scene0685_00
   #scene0692_00
   #scene0694_00
-  #scene0633_01 #scene0703_00 #scene0600_00 
+  #scene0703_00 #scene0600_00 
 
 
 dat_cfg:

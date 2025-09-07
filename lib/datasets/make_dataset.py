@@ -1,7 +1,8 @@
 import ast
 import os
 from time import time
-
+from pathlib import Path
+import yaml
 import numpy as np
 import torch
 import torch.utils.data
@@ -13,13 +14,21 @@ from lib.utils.registry import Registry
 
 DATASET = Registry('dataset')
 from .humanise.humanise_motion import HumaniseMotion
+def load_config():
+    config_path = Path(__file__).parent.parent.parent / 'configs' / 'configurations.yaml'
+    with open(config_path, 'r') as file:
+        return yaml.safe_load(file)
+
+config = load_config()
+
 
 client = AzureOpenAI(
-            azure_deployment="openai-base-demo-4o",
-            api_version='2024-04-01-preview',
-            api_key="35850b4269124a18ae47bde5f0a9c926",
-            azure_endpoint="https://openai-base-demo.openai.azure.com",
+            azure_deployment=config['azure_openai']['deployment'],
+            api_version=config['azure_openai']['api_version'],
+            api_key=config['azure_openai']['api_key'],
+            azure_endpoint=config['azure_openai']['endpoint']
         )
+
 
 def make_dataset(cfg, split='train'):
     tic = time()
